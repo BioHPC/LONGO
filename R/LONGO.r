@@ -169,11 +169,11 @@ LONGO <- function() {
       return(NULL)
     }
     else {
-      species_ensembl <<-
+      alldata.df$species_ensembl <-
         biomaRt::useMart("ENSEMBL_MART_ENSEMBL",
                          host = "www.ensembl.org",
                          dataset = input$species)
-      ensembl_attributes <- biomaRt::listAttributes(species_ensembl)
+      ensembl_attributes <- biomaRt::listAttributes(alldata.df$species_ensembl)
       ensembl_attributes <- ensembl_attributes[1]
       shiny::selectInput(
         inputId = "attribute",
@@ -193,7 +193,8 @@ LONGO <- function() {
       P_data = NULL,
       JS_data = NULL,
       status = "Please select options and start. Analysis can take up to a minute to complete. Please be patient",
-      labels = NULL
+      labels = NULL,
+      species_ensembl = NULL
     )
 
     output$columns <- shiny::renderText(c(1,2,3))
@@ -219,7 +220,7 @@ LONGO <- function() {
     shiny::observeEvent(input$action, {
       message("calling biomart")
       temp2 <-
-        callbiomaRt(alldata.df$filedata, input$attribute, species_ensembl)
+        callbiomaRt(alldata.df$filedata, input$attribute, alldata.df$species_ensembl)
       message("calling dict")
       alldata.df$rawdata <- dict(alldata.df$filedata, temp2)
       temp1 <- analyze(
@@ -365,7 +366,7 @@ LONGO <- function() {
         main = "LONGO P Value Plot"
       )
       for (i in 3:ncol(data.df.analyzed)) {
-        par(new = T)
+        par(new = TRUE)
         matplot(
           x = x_vals,
           y = data.df.analyzed[, i],
@@ -374,7 +375,7 @@ LONGO <- function() {
           xlab = "",
           ylab = "",
           ylim = c(yminim, ymax),
-          axes = F
+          axes = FALSE
         )
       }
       labels <- colnames(data.df.analyzed)
@@ -413,7 +414,7 @@ LONGO <- function() {
         main = "LONGO JS Plot"
       )
       for (i in 3:ncol(data.df.analyzed)) {
-        par(new = T)
+        par(new = TRUE)
         matplot(
           x = x_vals,
           y = data.df.analyzed[, i],
@@ -422,7 +423,7 @@ LONGO <- function() {
           xlab = "",
           ylab = "",
           ylim = c(yminim, ymax),
-          axes = F
+          axes = FALSE
         )
       }
       labels <- colnames(data.df.analyzed)
@@ -474,7 +475,7 @@ LONGO <- function() {
         main = "LONGO Correlation Plot"
       )
       for (i in 3:ncol(temp.df)) {
-        par(new = T)
+        par(new = TRUE)
         matplot(
           x = x_vals,
           y = temp.df[, i],
@@ -483,7 +484,7 @@ LONGO <- function() {
           xlab = "",
           ylab = "",
           ylim = c(yminim, ymax),
-          axes = F
+          axes = FALSE
         )
       }
       legend(

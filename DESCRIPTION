@@ -1,8 +1,9 @@
 Package: LONGO
 Type: Package
 Title: Long gene expression as a metric for neuronal identity
-Version: 0.1.7
-Imports: biomaRt, shiny, DT, hash
+Version: 0.1.8
+biocViews:
+Imports: biomaRt, shiny, DT, hash, stats, grDevices, graphics, utils
 Author: c(person("Alex Paul", email = "apaul7@slu.edu"), person("Tae-
     Hyuk (Ted) Ahn", email = "ahnt@slu.edu"), person("Matthew McCoy", email =
     "mccoy@wustl.edu"), person("Andrew Yoo", email = "yooa@wustl.edu"))

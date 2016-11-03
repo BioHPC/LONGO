@@ -24,7 +24,7 @@ plotLONGO <- function(simp.df) {
     main = "LONGO output"
   )
   for (i in 3:ncol(simp.df)) {
-    par(new = T)
+    par(new = TRUE)
     matplot(
       x = x_vals,
       y = simp.df[, i],
@@ -33,7 +33,7 @@ plotLONGO <- function(simp.df) {
       xlab = "",
       ylab = "",
       ylim = c(yminim, ymax),
-      axes = F
+      axes = FALSE
     )
   }
   labels <- colnames(simp.df)
