@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotLONGO.r
 \name{plotLONGO}
 \alias{plotLONGO}
-\title{main function}
+\title{Plot function}
 \usage{
 plotLONGO(simp.df)
 }
@@ -10,6 +10,6 @@ plotLONGO(simp.df)
 \item{simp.df}{dataframe to be plotted}
 }
 \description{
-analyzes data by creating windows and moving by a step size
+This is a internal function. This function allows the program to plot the data.
 }
 

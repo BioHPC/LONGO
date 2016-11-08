@@ -1,6 +1,9 @@
-#' main command function
+#' LONGO function
 #'
-#' analyzes data by creating windows and moving by a step size all through command line
+#' This function allows the user to preset the variables and allows a faster
+#' analysis of data. Please use the shiny interface first to get an
+#' understanding of how this package analyzes data.
+#'
 #' @param FILE Address to the file to be analyzed
 #' @param SEP Option to specify the separated value, default=","
 #' @param HEADER Option to specify if there is a header in the file, default=TRUE
@@ -14,6 +17,10 @@
 #' @param FILTERED Option to filter data, default=TRUE
 #' @param NORMALIZED Option to normalize data, default=TRUE
 #' @param CONTROL_COLUMN_INDEX column of the data used as a control for the statistical analysis
+#' @examples
+#' LONGOcmd(datafile)
+#' LONGOcmd(datafile, WINDOW_SIZE=100, STEP_SIZE=20)
+#' LONGOcmd(datafile, MULTI_PROBES="mean")
 #' @export
 LONGOcmd <- function(FILE,
                      SEP = ",",
@@ -94,5 +101,4 @@ LONGOcmd <- function(FILE,
   # Plot graph
   plotLONGO(simp.df)
   message("* Finished LONGO")
-  return()
 }

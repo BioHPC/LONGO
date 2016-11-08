@@ -2,8 +2,7 @@
 % Please edit documentation in R/analyze.r
 \name{analyze}
 \alias{analyze}
-\title{analyze data
-Takes in a dataframe analyzes it. internal function}
+\title{LONGO analysis}
 \usage{
 analyze(DATA.DF, MULTI_PROBES, WINDOW_SIZE, STEP_SIZE, WINDOW_STYLE, FILTERED,
   NORMALIZED, CONTROL_COLUMN_INDEX)
@@ -29,7 +28,6 @@ analyze(DATA.DF, MULTI_PROBES, WINDOW_SIZE, STEP_SIZE, WINDOW_STYLE, FILTERED,
 returns the simplified data
 }
 \description{
-analyze data
-Takes in a dataframe analyzes it. internal function
+This is a internal function. Used by the package to take a formatted dataframe and analyzes it based on the user inputted values.
 }
 

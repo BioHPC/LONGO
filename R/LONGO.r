@@ -1,6 +1,8 @@
-#' main function
+#' Use LONGO through shiny interface
 #'
-#' Allows user to input data and alter output variables to get final dataframe and plot through a Shiny interface.
+#' This function allows the user to input data files and alter the input variables to make sure the formatting is correct.
+#' They can then run thte LONGO package which will output the results and plots in the browser and allow the user to download results as needed.
+#'
 #' @importFrom biomaRt listDatasets
 #' @importFrom biomaRt useMart
 #' @importFrom biomaRt listAttributes
@@ -81,7 +83,7 @@ LONGO <- function() {
                         #   #textOutput(outputId="timer")
                       ),
                       shiny::mainPanel(
-                        shiny::uiOutput(outputId = "ui.statusmessage"),
+                        shiny::uiOutput(outputId = "statusmessage"),
                         DT::dataTableOutput(outputId = "data_preview")
                       )
                     )),
@@ -140,9 +142,6 @@ LONGO <- function() {
                           width = 1200#,
                           # click = "plot_click"
                         ),
-                        # fluidRow(
-                        # splitLayout(cellWidths = c("50%","50%"), plotOutput(outputId = "plot2"), plotOutput(outputId = "plot3"))
-                        # ),
                         shiny::plotOutput(
                           outputId = "plot2",
                           height = 800,
@@ -155,6 +154,11 @@ LONGO <- function() {
                           width = 1200
                         ),
                         shiny::downloadButton(outputId = "downloadJSData", label = "Download JS Values"),
+                     #   shiny::plotOutput(
+                     #    outputId = "plot4",
+                     #    height = 800,
+                     #    width = 1200
+                     #   ),
                         DT::dataTableOutput(outputId = "data_final_table")
                       )
                     )),
@@ -214,10 +218,18 @@ LONGO <- function() {
           comment.char = "!",
           na.strings = c("NA", " ", "")
         )
+    })
+
+    output$statusmessage <- shiny::renderUI({
+      shiny::tags$h2(alldata.df$status)
 
     })
 
     shiny::observeEvent(input$action, {
+      if(is.null(input$datafile)){
+        alldata.df$status <- "Please load a file and then click submit"
+        return()
+      }
       message("calling biomart")
       temp2 <-
         callbiomaRt(alldata.df$filedata, input$attribute, alldata.df$species_ensembl)
@@ -278,18 +290,6 @@ LONGO <- function() {
       shiny::actionButton(inputId = "action", label = "Submit")
     })
 
-    # Create text to ask for patience. The largest datasets I've run take less than 45 seconds.
-    output$ui.action.text <- shiny::renderUI({
-      if (is.null(input$datafile)) {
-        return (NULL)
-      }
-      shiny::tags$p("After submitting, please allow up to 1 minute to compute.")
-    })
-
-    output$ui.statusmessage <- shiny::renderUI({
-      shiny::tags$h2(alldata.df$status)
-    })
-
     output$data_annotated <- DT::renderDataTable(alldata.df$rawdata)
 
     output$plot1 <- shiny::renderPlot({
@@ -318,7 +318,7 @@ LONGO <- function() {
         main = "LONGO Plot"
       )
       for (i in 3:ncol(data.df.analyzed)) {
-        par(new = T)
+        par(new = TRUE)
         matplot(
           x = x_vals,
           y = data.df.analyzed[, i],
@@ -327,7 +327,7 @@ LONGO <- function() {
           xlab = "",
           ylab = "",
           ylim = c(yminim, ymax),
-          axes = F
+          axes = FALSE
         )
       }
       labels <- colnames(data.df.analyzed)
@@ -496,6 +496,10 @@ LONGO <- function() {
         ncol = 2
       )
     })
+
+
+  #  output$plot4 <- shiny::renderPlot({
+  #  })
 
     output$data_final_table <-
       DT::renderDataTable(DT::datatable(alldata.df$finaldata))

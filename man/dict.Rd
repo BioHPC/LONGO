@@ -2,7 +2,7 @@
 % Please edit documentation in R/dict.r
 \name{dict}
 \alias{dict}
-\title{dict}
+\title{LONGO dictionary function}
 \usage{
 dict(data.df, source_data.bm)
 }
@@ -15,6 +15,8 @@ dict(data.df, source_data.bm)
 returns a dictionary
 }
 \description{
-creates and returns a dicitonary
+This is a internal function. This function creates and returns a dictionary
+based on the user inputted values. Used to quickly link expression data
+with names and lengths.
 }
 

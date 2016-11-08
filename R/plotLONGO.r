@@ -1,6 +1,7 @@
-#' main function
+#' Plot function
 #'
-#' analyzes data by creating windows and moving by a step size
+#' This is a internal function. This function allows the program to plot the data.
+#'
 #' @param simp.df dataframe to be plotted
 plotLONGO <- function(simp.df) {
   x_vals <- (simp.df$kb_length)

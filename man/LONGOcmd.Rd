@@ -2,7 +2,7 @@
 % Please edit documentation in R/LONGOcmd.R
 \name{LONGOcmd}
 \alias{LONGOcmd}
-\title{main command function}
+\title{LONGO function}
 \usage{
 LONGOcmd(FILE, SEP = ",", HEADER = TRUE, COMMENT_CHAR = "!",
   SPECIES = "hsapiens_gene_ensembl", LIBRARY_TYPE = "affy_primeview",
@@ -38,6 +38,13 @@ LONGOcmd(FILE, SEP = ",", HEADER = TRUE, COMMENT_CHAR = "!",
 \item{CONTROL_COLUMN_INDEX}{column of the data used as a control for the statistical analysis}
 }
 \description{
-analyzes data by creating windows and moving by a step size all through command line
+This function allows the user to preset the variables and allows a faster
+analysis of data. Please use the shiny interface first to get an
+understanding of how this package analyzes data.
+}
+\examples{
+LONGOcmd(datafile)
+LONGOcmd(datafile, WINDOW_SIZE=100, STEP_SIZE=20)
+LONGOcmd(datafile, MULTI_PROBES="mean")
 }
 

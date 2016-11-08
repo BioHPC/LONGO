@@ -2,7 +2,7 @@
 % Please edit documentation in R/openfile.r
 \name{openfile}
 \alias{openfile}
-\title{openfile}
+\title{File opener}
 \usage{
 openfile(FILE, SEP, HEADER, COMMENT_CHAR)
 }
@@ -16,6 +16,7 @@ openfile(FILE, SEP, HEADER, COMMENT_CHAR)
 \item{COMMENT_CHAR}{character used as commented lines to be ignored in the file}
 }
 \description{
-opens a file and reads the data into a dataframe
+This is an internal functuon. This function opens a file
+and reads the data into a dataframe.
 }
 

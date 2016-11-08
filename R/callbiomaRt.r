@@ -1,6 +1,7 @@
-#' callbiomaRt
+#' LONGO call biomaRt
 #'
-#' calls the biomaRt databse based on inputed data
+#' This is a internal function. This function calls the biomaRt database to retrieve the gene symbols and lengths.
+#'
 #' @param data.df dataframe that contains the probe ids that will be checked
 #' @param library_type the gene identifier of the data based off the biomaRt database
 #' @param ensembl BiomaRt mart based on the given species

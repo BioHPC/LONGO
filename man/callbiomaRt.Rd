@@ -2,7 +2,7 @@
 % Please edit documentation in R/callbiomaRt.r
 \name{callbiomaRt}
 \alias{callbiomaRt}
-\title{callbiomaRt}
+\title{LONGO call biomaRt}
 \usage{
 callbiomaRt(data.df, library_type, ensembl)
 }
@@ -17,6 +17,6 @@ callbiomaRt(data.df, library_type, ensembl)
 returns the data.df with two new columns, length and symbol
 }
 \description{
-calls the biomaRt databse based on inputed data
+This is a internal function. This function calls the biomaRt database to retrieve the gene symbols and lengths.
 }
 

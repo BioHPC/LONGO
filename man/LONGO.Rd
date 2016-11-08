@@ -2,11 +2,12 @@
 % Please edit documentation in R/LONGO.r
 \name{LONGO}
 \alias{LONGO}
-\title{main function}
+\title{Use LONGO through shiny interface}
 \usage{
 LONGO()
 }
 \description{
-Allows user to input data and alter output variables to get final dataframe and plot through a Shiny interface.
+This function allows the user to input data files and alter the input variables to make sure the formatting is correct.
+They can then run thte LONGO package which will output the results and plots in the browser and allow the user to download results as needed.
 }
 

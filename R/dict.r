@@ -1,6 +1,9 @@
-#' dict
+#' LONGO dictionary function
 #'
-#' creates and returns a dicitonary
+#' This is a internal function. This function creates and returns a dictionary
+#' based on the user inputted values. Used to quickly link expression data
+#' with names and lengths.
+#'
 #' @param data.df inputed data
 #' @param source_data.bm biomaRt database
 #' @importFrom hash keys

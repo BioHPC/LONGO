@@ -1,6 +1,8 @@
-#' openfile
+#' File opener
 #'
-#'opens a file and reads the data into a dataframe
+#' This is an internal functuon. This function opens a file
+#' and reads the data into a dataframe.
+#'
 #' @param FILE location to the file to be opened
 #' @param SEP variable that is used to separate columns
 #' @param HEADER true/false used to open a file with or without a header

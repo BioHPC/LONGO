@@ -1,5 +1,7 @@
-#' analyze data
-#' Takes in a dataframe analyzes it. internal function
+#' LONGO analysis
+#'
+#' This is a internal function. Used by the package to take a formatted dataframe and analyzes it based on the user inputted values.
+#'
 #' @param DATA.DF dataframe to be analyzed
 #' @param MULTI_PROBES Option to select what to do with multiple probes to a single gene, default=highest
 #' @param WINDOW_SIZE Option to alter the size of the windows to be created from the dataframe, default=200
@@ -45,8 +47,9 @@ analyze <-
       }
 
     JSdist <-
-      function(x, y)
+      function(x, y){
         0.5 * KLdist(x, (x + y) / 2) + 0.5 * KLdist(y, (x + y) / 2)
+      }
 
 
     for (x in 2:(ncol(DATA.DF) - 2)) {
@@ -73,7 +76,7 @@ analyze <-
       keys <- colnames(DATA.DF)[(ncol(DATA.DF) - 1)]
       temp.dt <- data.table::as.data.table(DATA.DF)
       temp2 <- temp.dt[, lapply(data.table::.SD, mean), by = keys]
-      DATA.DF <- data.table::as.data.frame(temp2)
+      DATA.DF <- as.data.frame(temp2)
     }
     else{
       message("Please choose to either keep the highest probe expression values or average them out")
@@ -156,17 +159,7 @@ analyze <-
           pvalues.df[step_number, column_index] <- 1
         }
 
-        if (all(x == 0) && all(y == 0)) {
-          JSdistance = 0
-        } else {
-          JSdistance <- JSdist(x, y)
-        }
 
-        if (is.na(JSdistance)) {
-          JSdistance = 0
-        }
-
-        JSdistances.df[step_number, column_index] <- JSdistance
       }
       w <- w + STEP_SIZE
       step_number <- step_number + 1
@@ -179,7 +172,24 @@ analyze <-
       col.names = TRUE,
       row.names = FALSE
     )
+    for(step_number in (2:s)){
+    for (column_index in (2:(ncol(DATA.DF) - 1))) {
+      x <- simp.df[2:step_number, CONTROL_COLUMN_INDEX]
+      y <- simp.df[2:step_number, column_index]
 
+      if (all(x == 0) && all(y == 0)) {
+        JSdistance = 0
+      } else {
+        JSdistance <- JSdist(x, y)
+      }
+
+      if (is.na(JSdistance)) {
+        JSdistance = 0
+      }
+
+      JSdistances.df[step_number, column_index] <- JSdistance
+    }
+    }
     # write.table(pvalues.df, "LONGO_out_pvalue_table.tsv", sep = "\t", quote=FALSE, col.names=TRUE, row.names=FALSE)
     return(list(simp.df, pvalues.df, JSdistances.df))
   }
