@@ -87,12 +87,12 @@ LONGO <- function() {
                         DT::dataTableOutput(outputId = "data_preview")
                       )
                     )),
-    shiny::tabPanel(title = "data table",
+    shiny::tabPanel(title = "Data Table",
                     shiny::mainPanel(
                       DT::dataTableOutput("data_annotated"),
                       shiny::downloadButton(outputId = "downloadRawData", label = "Download")
                     )),
-    shiny::tabPanel(title = "plot output",
+    shiny::tabPanel(title = "LONGO Output",
                     shiny::sidebarLayout(
                       shiny::sidebarPanel(
                         shiny::radioButtons(
@@ -154,17 +154,11 @@ LONGO <- function() {
                           width = 1200
                         ),
                         shiny::downloadButton(outputId = "downloadJSData", label = "Download JS Values"),
-                     #   shiny::plotOutput(
-                     #    outputId = "plot4",
-                     #    height = 800,
-                     #    width = 1200
-                     #   ),
                         DT::dataTableOutput(outputId = "data_final_table")
                       )
                     )),
-    shiny::tabPanel(title = "statistic plots",
-                    shiny::mainPanel(# plotOutput(outputId = "plot2"),
-                      # plotOutput(outputId = "plot3"),
+    shiny::tabPanel(title = "LONGO Quotient",
+                    shiny::mainPanel(
                       shiny::plotOutput(outputId = "plot4")))
   ))
 
@@ -196,6 +190,7 @@ LONGO <- function() {
       finaldata = NULL,
       P_data = NULL,
       JS_data = NULL,
+      LQ_data = NULL,
       status = "Please select options and start. Analysis can take up to a minute to complete. Please be patient",
       labels = NULL,
       species_ensembl = NULL
@@ -249,6 +244,7 @@ LONGO <- function() {
       alldata.df$finaldata <- as.data.frame(temp1[1])
       alldata.df$P_data <- as.data.frame(temp1[2])
       alldata.df$JS_data <- as.data.frame(temp1[3])
+      alldata.df$LQ_data <- as.data.frame(temp1[4])
       updateRadioButtons(session = session,inputId = "control", choices = colnames(alldata.df$filedata)[2:(ncol(alldata.df$filedata))])
       alldata.df$status <- "Analysis completed"
     })
@@ -277,6 +273,7 @@ LONGO <- function() {
       alldata.df$finaldata <- as.data.frame(temp1[1])
       alldata.df$P_data <- as.data.frame(temp1[2])
       alldata.df$JS_data <- as.data.frame(temp1[3])
+      alldata.df$LQ_data <- as.data.frame(temp1[4])
     })
 
     output$data_preview <- DT::renderDataTable({
@@ -437,69 +434,14 @@ LONGO <- function() {
       )
     })
     output$plot4 <- shiny::renderPlot({
-      data.df.analyzed <- alldata.df$finaldata
-      last_point <- 10
-      total_points <- (nrow(data.df.analyzed) - last_point)
-      control_column <- 2
-      labels <- colnames(data.df.analyzed)
-      temp.df <- data.frame(data.df.analyzed[1:total_points, 1])
-      for (i in 2:(ncol(data.df.analyzed))) {
-        temp.df[,i] <- rep(0, total_points)
-      }
-      for (i in total_points:1) {
-        for (j in 2:(ncol(data.df.analyzed))) {
-          temp.df[i, j] <-
-            cor(data.df.analyzed[(nrow(data.df.analyzed):i), control_column], data.df.analyzed[(nrow(data.df.analyzed):i), j])
-        }
-      }
-      if (input$scale == "linear") {
-        x_vals <- (temp.df[,1])
-        x_lab <- "Gene length in KB"
-      }
-      else{
-        # log
-        x_vals <- log(temp.df[,1])
-        x_lab <- "Log(Gene Length)"
-      }
-      ymax <-
-        (max(temp.df[, 2:(ncol(temp.df))]) * 1.5)
-      yminim <- min(temp.df[, 2:(ncol(temp.df))])
-      matplot(
-        x = x_vals,
-        y = temp.df[, 2],
-        type = "l",
-        col = 1,
-        xlab = x_lab,
-        ylim = c(yminim, ymax),
-        ylab = "Correlation",
-        main = "LONGO Correlation Plot"
-      )
-      for (i in 3:ncol(temp.df)) {
-        par(new = TRUE)
-        matplot(
-          x = x_vals,
-          y = temp.df[, i],
-          type = "l",
-          col = i - 1,
-          xlab = "",
-          ylab = "",
-          ylim = c(yminim, ymax),
-          axes = FALSE
-        )
-      }
-      legend(
-        input$legend,
-        legend = c(labels[2:length(labels)]),
-        col = 2:ncol(temp.df) - 1,
-        lty = 1,
-        cex = 1,
-        ncol = 2
-      )
+      plot_data.df <- alldata.df$LQ_data
+      bp <- barplot(as.matrix(plot_data.df), axes = 1, ylim = c(-1,1), axisnames=FALSE)
+      abline(h = 0.25, col = "red")
+      text(bp, par("usr")[3], labels = colnames(plot_data.df), srt = 45, adj = c(1.1,1.1), xpd = TRUE, cex = .9)
+      mtext(text = input$datafile, outer = TRUE, cex = 1.5)
+
     })
 
-
-  #  output$plot4 <- shiny::renderPlot({
-  #  })
 
     output$data_final_table <-
       DT::renderDataTable(DT::datatable(alldata.df$finaldata))

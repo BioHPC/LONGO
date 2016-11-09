@@ -173,23 +173,25 @@ analyze <-
       row.names = FALSE
     )
     for(step_number in (2:s)){
-    for (column_index in (2:(ncol(DATA.DF) - 1))) {
-      x <- simp.df[2:step_number, CONTROL_COLUMN_INDEX]
-      y <- simp.df[2:step_number, column_index]
+      for (column_index in (2:(ncol(DATA.DF) - 1))) {
+        x <- simp.df[2:step_number, CONTROL_COLUMN_INDEX]
+        y <- simp.df[2:step_number, column_index]
 
-      if (all(x == 0) && all(y == 0)) {
-        JSdistance = 0
-      } else {
-        JSdistance <- JSdist(x, y)
+        if (all(x == 0) && all(y == 0)) {
+          JSdistance = 0
+        } else {
+          JSdistance <- JSdist(x, y)
+        }
+
+        if (is.na(JSdistance)) {
+          JSdistance = 0
+        }
+
+        JSdistances.df[step_number, column_index] <- JSdistance
       }
-
-      if (is.na(JSdistance)) {
-        JSdistance = 0
-      }
-
-      JSdistances.df[step_number, column_index] <- JSdistance
     }
-    }
+    LQ.df <- LONGOquotient(DATA.DF,JSdistances.df,CONTROL_COLUMN_INDEX)
+
     # write.table(pvalues.df, "LONGO_out_pvalue_table.tsv", sep = "\t", quote=FALSE, col.names=TRUE, row.names=FALSE)
-    return(list(simp.df, pvalues.df, JSdistances.df))
+    return(list(simp.df, pvalues.df, JSdistances.df, LQ.df))
   }

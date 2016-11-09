@@ -97,7 +97,15 @@ LONGOcmd <- function(FILE,
     col.names = TRUE,
     row.names = FALSE
   )
-
+  lq <- as.data.frame(temp.df[4])
+  write.table(
+    lq,
+    "LONGO_out_LONGO_Quotient.tsv",
+    sep = "\t",
+    quote = FALSE,
+    col.names = TRUE,
+    row.names = FALSE
+  )
   # Plot graph
   plotLONGO(simp.df)
   message("* Finished LONGO")
