@@ -9,7 +9,8 @@ callbiomaRt(data.df, library_type, ensembl)
 \arguments{
 \item{data.df}{dataframe that contains the probe ids that will be checked}
 
-\item{library_type}{the gene identifier of the data based off the biomaRt database}
+\item{library_type}{the gene identifier of the data based off the
+biomaRt database}
 
 \item{ensembl}{BiomaRt mart based on the given species}
 }
@@ -17,6 +18,7 @@ callbiomaRt(data.df, library_type, ensembl)
 returns the data.df with two new columns, length and symbol
 }
 \description{
-This is a internal function. This function calls the biomaRt database to retrieve the gene symbols and lengths.
+This is a internal function. This function calls the biomaRt database to
+retrieve the gene symbols and lengths.
 }
 

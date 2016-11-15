@@ -3,6 +3,7 @@
 #' This is a internal function. This function allows the program to plot the data.
 #'
 #' @param simp.df dataframe to be plotted
+#' @return Returns nothing
 plotLONGO <- function(simp.df) {
   x_vals <- (simp.df$kb_length)
   ymax <- (max(simp.df[, 2:(ncol(simp.df))]) * 1.2)

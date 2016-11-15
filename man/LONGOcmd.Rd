@@ -15,27 +15,38 @@ LONGOcmd(FILE, SEP = ",", HEADER = TRUE, COMMENT_CHAR = "!",
 
 \item{SEP}{Option to specify the separated value, default=","}
 
-\item{HEADER}{Option to specify if there is a header in the file, default=TRUE}
+\item{HEADER}{Option to specify if there is a header in the file,
+default=TRUE}
 
-\item{COMMENT_CHAR}{Option to specify the commented character in the loaded file, default="!"}
+\item{COMMENT_CHAR}{Option to specify the commented character in the loaded
+file, default="!"}
 
 \item{SPECIES}{species name of the data based off the biomaRt database}
 
-\item{LIBRARY_TYPE}{the gene identifier of the data based off the biomaRt database}
+\item{LIBRARY_TYPE}{the gene identifier of the data based off the
+biomaRt database}
 
-\item{MULTI_PROBES}{Option to change the method for handling multiple probes going to the same gene, default=highest}
+\item{MULTI_PROBES}{Option to change the method for handling multiple probes
+going to the same gene, default=highest}
 
-\item{WINDOW_SIZE}{Option to alter the size of the windows to be created from the dataframe, default=200}
+\item{WINDOW_SIZE}{Option to alter the size of the windows to be created
+from the dataframe, default=200}
 
-\item{STEP_SIZE}{Option to alter the size of the steps used to create the windows, default=40}
+\item{STEP_SIZE}{Option to alter the size of the steps used to create the
+windows, default=40}
 
-\item{WINDOW_STYLE}{Option to alter the method used to create windows, default=mean}
+\item{WINDOW_STYLE}{Option to alter the method used to create windows,
+default=mean}
 
 \item{FILTERED}{Option to filter data, default=TRUE}
 
 \item{NORMALIZED}{Option to normalize data, default=TRUE}
 
-\item{CONTROL_COLUMN_INDEX}{column of the data used as a control for the statistical analysis}
+\item{CONTROL_COLUMN_INDEX}{column of the data used as a control for the
+statistical analysis}
+}
+\value{
+Returns nothing
 }
 \description{
 This function allows the user to preset the variables and allows a faster

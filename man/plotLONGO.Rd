@@ -9,6 +9,9 @@ plotLONGO(simp.df)
 \arguments{
 \item{simp.df}{dataframe to be plotted}
 }
+\value{
+Returns nothing
+}
 \description{
 This is a internal function. This function allows the program to plot the data.
 }

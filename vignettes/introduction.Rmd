@@ -8,15 +8,103 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-This package is used to analyze data. 'LONGO' 
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
 ## LONGO
-This will be used to describe more about what the LONGO package methods are. Use similar plot as the plot used for the paper? Describes the overall design of the program. 
+
+LONGO is designed to have two different uses. One through a shiny interface and another through R. Both of the results of these uses of the program are the same. The shiny interface will allow the user to alter certain variables in the analysis to see how they will affect the final result. This can be useful when interpreting new data. 
+
+LONGO is designed to take in a data file, take the gene identifier to get the gene name and length. Occasionally there will be multiple probes going to a single gene. LONGO can handle this in two different ways. The default way is by only keeping the probe that has the highest overall expression values. The other option is to get the mean expression values. If a read has no identified gene name or length in biomaRt, the read is removed. 
+
+After getting the gene names and lengths the data is sorted by length. A rolling window is used to create bins. The user can change the size of the window as well as the step size of the window. 
+
+## Prerequisites:
+
+### Bioconductor packages:  
+  - biomaRt  
+```{} 
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("biomaRt")
+```
+  - edgeR  
+```{}
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("edgeR")  
+```
+  - preprocessCore  
+```{}
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("preprocessCore")
+```  
+
+###  CRAN packages:  
+  - shiny  
+```{}
+    install.packages("shiny") 
+```  
+  - DT
+```{}
+    install.packages("DT") 
+```
+  - data.table
+```{}
+    install.packages("data.table") 
+```
+  - hash
+```{}
+    install.packages("hash") 
+```
+  
+## Usage:
+
+### LONGO():
+The LONGO function allows the user to input the intitial variables to get a
+result and then allows the user to alter some of the variables and see how 
+they will change the results. 
+```{}
+  LONGO()
+```
+
+### LONGOcmd():
+The LONGOcmd function will automatically write the output data files to your 
+working directory. This can allow faster data analysis if you know the values
+to use. 
+```{}
+   LONGOcmd("~/data.tsv")
+   LONGOcmd("~/data.tsv", SEP = "\t")
+   LONGOcmd("~/data.tsv", WINDOW_SIZE = 350, MULTI_PROBES = "mean", FILTERED = FALSE)
+```
+
+
+## BiomaRt identifier
+
+```{r, echo=FALSE}
+   biomaRt::listDatasets(biomaRt::useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org"))[1]
+```
+
+```{r, echo=FALSE}
+   biomaRt::listAttributes(biomaRt::useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org",
+                         dataset = "hsapiens_gene_ensembl"))[1]
+```
+
+## Output
+
+### LONGO Data
+show output data...
+
+### LONGO Plot
+show output plot
+
+### JS Distance
+show output plot
+
+
+
+
+
+
+
+
+this is for my reference. will be removed,....
+
 
 ## Vignette Info
 

@@ -1,14 +1,16 @@
 #' LONGO call biomaRt
 #'
-#' This is a internal function. This function calls the biomaRt database to retrieve the gene symbols and lengths.
+#' This is a internal function. This function calls the biomaRt database to
+#' retrieve the gene symbols and lengths.
 #'
 #' @param data.df dataframe that contains the probe ids that will be checked
-#' @param library_type the gene identifier of the data based off the biomaRt database
+#' @param library_type the gene identifier of the data based off the
+#' biomaRt database
 #' @param ensembl BiomaRt mart based on the given species
 #' @importFrom biomaRt getBM
 #' @return returns the data.df with two new columns, length and symbol
 callbiomaRt <- function(data.df, library_type, ensembl) {
-  #call biomart for gene symbols and lengths from user identifier, (library_type)
+  #call biomart for gene symbols and lengths from user identifier
   source_data.bm <-
     biomaRt::getBM(
       attributes = c(
@@ -45,7 +47,5 @@ callbiomaRt <- function(data.df, library_type, ensembl) {
   affy.df <- (affy.df[!duplicated(affy.df[, 1]),])
   row.names(affy.df) <- 1:nrow(affy.df)
 
-  #output file if needed
-  #write.table(affy.df, "LONGO_out_affy_table.tsv", sep = "\t", quote=FALSE, col.names=TRUE, row.names=FALSE)
   return(affy.df)
 }

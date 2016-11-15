@@ -6,8 +6,17 @@
 \usage{
 LONGO()
 }
+\value{
+Returns nothing
+}
 \description{
-This function allows the user to input data files and alter the input variables to make sure the formatting is correct.
-They can then run thte LONGO package which will output the results and plots in the browser and allow the user to download results as needed.
+This function allows the user to input data files and alter the input
+variables to make sure the formatting is correct.
+They can then run the LONGO package which will output the results and plots
+in the browser and allow the user to download results as needed.
+}
+\examples{
+LONGO()
+
 }
 

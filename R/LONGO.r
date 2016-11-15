@@ -1,8 +1,11 @@
 #' Use LONGO through shiny interface
 #'
-#' This function allows the user to input data files and alter the input variables to make sure the formatting is correct.
-#' They can then run thte LONGO package which will output the results and plots in the browser and allow the user to download results as needed.
+#' This function allows the user to input data files and alter the input
+#' variables to make sure the formatting is correct.
+#' They can then run the LONGO package which will output the results and plots
+#' in the browser and allow the user to download results as needed.
 #'
+#' @return Returns nothing
 #' @importFrom biomaRt listDatasets
 #' @importFrom biomaRt useMart
 #' @importFrom biomaRt listAttributes
@@ -20,147 +23,165 @@
 #' @importFrom utils read.csv
 #' @importFrom utils write.csv
 #' @importFrom utils write.table
+#' @import graphics
+#' @examples
+#' LONGO()
+#'
 #' @export
 LONGO <- function() {
   ensembl <-
-    useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org")
+    biomaRt::useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org")
   datasets <- biomaRt::listDatasets(ensembl)
   datasets <- datasets[1]
-  datasets <- datasets[order(datasets[1]), ]
+  datasets <- datasets[order(datasets[1]),]
   datasets <- as.data.frame(datasets)
   status <- 0
-  ui <- shiny::shinyUI(navbarPage(
-    "LONGO",
-    shiny::tabPanel(title = "Data input",
-                    shiny::sidebarLayout(
-                      shiny::sidebarPanel(
-                        shiny::selectInput(
-                          inputId = "species",
-                          label = "Choose species gene ensembl:",
-                          choices = datasets[1],
-                          selected = "hsapiens_gene_ensembl"
-                        ),
-                        shiny::uiOutput("identifier"),
-                        shiny::fileInput(
-                          inputId = "datafile",
-                          label = "Choose CSV file:",
-                          accept = c(
-                            "text/csv",
-                            "text/comma-separated-values,text/plain",
-                            ".csv",
-                            ".tsv"
-                          )
-                        ),
-                        shiny::checkboxInput(
-                          inputId = "header",
-                          label = "Header",
-                          value = TRUE
-                        ),
-                        shiny::radioButtons(
-                          inputId = "sep",
-                          label = "Separator",
-                          choices = c(
-                            Tab = "\t",
-                            Comma = ",",
-                            Semicolon = ";"
-                          ),
-                          selected = "\t"
-                        ),
-                        shiny::checkboxInput(
-                          inputId = "normalized",
-                          label = "Normalized",
-                          value = TRUE
-                        ),
-                        shiny::checkboxInput(
-                          inputId = "filtered",
-                          label = "Filtered",
-                          value = TRUE
-                        ),
-                        shiny::actionButton(inputId = "action", label = "Submit")
-                        # uiOutput("ui.action"),
-                        # tags$hr(),
-                        # uiOutput("ui.action.text")#,
-                        #   #textOutput(outputId="timer")
-                      ),
-                      shiny::mainPanel(
-                        shiny::uiOutput(outputId = "statusmessage"),
-                        DT::dataTableOutput(outputId = "data_preview")
-                      )
-                    )),
-    shiny::tabPanel(title = "Data Table",
-                    shiny::mainPanel(
-                      DT::dataTableOutput("data_annotated"),
-                      shiny::downloadButton(outputId = "downloadRawData", label = "Download")
-                    )),
-    shiny::tabPanel(title = "LONGO Output",
-                    shiny::sidebarLayout(
-                      shiny::sidebarPanel(
-                        shiny::radioButtons(
-                          inputId = "meanmedian",
-                          label = "Sliding Window Method:",
-                          choices = c("median", "mean")
-                        ),
-                        shiny::radioButtons(
-                          inputId = "highestmean",
-                          label = "Handle Multi Probes to Single Gene",
-                          choices = c("highest", "mean")
-                        ),
-                        shiny::radioButtons(
-                          inputId = "scale",
-                          label = "X-axis scale:",
-                          choices = c("linear", "log")
-                        ),
-                        shiny::radioButtons(
-                          inputId = "legend",
-                          label = "Legend Position",
-                          choices = c("topleft", "topright", "bottomleft", "bottomright"),
-                          selected = "topright"
-                        ),
-                        shiny::sliderInput(
-                          inputId = "bin_size",
-                          label = "Bin Size:",
-                          min = 100,
-                          max = 1000,
-                          value = 200,
-                          step = 100
-                        ),
-                        shiny::sliderInput(
-                          inputId = "step_size",
-                          label = "Step Size",
-                          min = 20,
-                          max = 200,
-                          value = 40,
-                          step = 10
-                        ),
-                        shiny::radioButtons(inputId = "control", label = "Control Column",choices = c(1,2)),
-                        shiny::downloadButton(outputId = "downloadFinalData", label = "Download Data")
-                      ),
-                      shiny::mainPanel(
-                        shiny::plotOutput(
-                          outputId = "plot1",
-                          height = 800,
-                          width = 1200#,
-                          # click = "plot_click"
-                        ),
-                        shiny::plotOutput(
-                          outputId = "plot2",
-                          height = 800,
-                          width = 1200
-                        ),
-                        shiny::downloadButton(outputId = "downloadPData", label = "Download P Values"),
-                        shiny::plotOutput(
-                          outputId = "plot3",
-                          height = 800,
-                          width = 1200
-                        ),
-                        shiny::downloadButton(outputId = "downloadJSData", label = "Download JS Values"),
-                        DT::dataTableOutput(outputId = "data_final_table")
-                      )
-                    )),
-    shiny::tabPanel(title = "LONGO Quotient",
-                    shiny::mainPanel(
-                      shiny::plotOutput(outputId = "plot4")))
-  ))
+  ui <- shiny::shinyUI(
+    navbarPage(
+      "LONGO",
+      shiny::tabPanel(
+        title = "Data input",
+        shiny::sidebarLayout(
+          shiny::sidebarPanel(
+            shiny::selectInput(
+              inputId = "species",
+              label = "Choose species gene ensembl:",
+              choices = datasets[1],
+              selected = "hsapiens_gene_ensembl"
+            ),
+            shiny::uiOutput("identifier"),
+            shiny::fileInput(
+              inputId = "datafile",
+              label = "Choose CSV file:",
+              accept = c(
+                "text/csv",
+                "text/comma-separated-values,text/plain",
+                ".csv",
+                ".tsv"
+              )
+            ),
+            shiny::checkboxInput(
+              inputId = "header",
+              label = "Header",
+              value = TRUE
+            ),
+            shiny::radioButtons(
+              inputId = "sep",
+              label = "Separator",
+              choices = c(
+                Tab = "\t",
+                Comma = ",",
+                Semicolon = ";"
+              ),
+              selected = "\t"
+            ),
+            shiny::checkboxInput(
+              inputId = "normalized",
+              label = "Normalized",
+              value = TRUE
+            ),
+            shiny::checkboxInput(
+              inputId = "filtered",
+              label = "Filtered",
+              value = TRUE
+            ),
+            shiny::actionButton(inputId = "action", label = "Submit")
+            # uiOutput("ui.action"),
+            # tags$hr(),
+            # uiOutput("ui.action.text")#,
+            #   #textOutput(outputId="timer")
+          ),
+          shiny::mainPanel(
+            shiny::uiOutput(outputId = "statusmessage"),
+            DT::dataTableOutput(outputId = "data_preview")
+          )
+        )
+      ),
+      shiny::tabPanel(
+        title = "Data Table",
+        shiny::mainPanel(
+          DT::dataTableOutput("data_annotated"),
+          shiny::downloadButton(outputId = "downloadRawData", label = "Download")
+        )
+      ),
+      shiny::tabPanel(
+        title = "LONGO Output",
+        shiny::sidebarLayout(
+          shiny::sidebarPanel(
+            shiny::radioButtons(
+              inputId = "meanmedian",
+              label = "Sliding Window Method:",
+              choices = c("median", "mean")
+            ),
+            shiny::radioButtons(
+              inputId = "highestmean",
+              label = "Handle Multi Probes to Single Gene",
+              choices = c("highest", "mean")
+            ),
+            shiny::radioButtons(
+              inputId = "scale",
+              label = "X-axis scale:",
+              choices = c("linear", "log")
+            ),
+            shiny::radioButtons(
+              inputId = "legend",
+              label = "Legend Position",
+              choices = c("topleft", "topright", "bottomleft", "bottomright"),
+              selected = "topright"
+            ),
+            shiny::sliderInput(
+              inputId = "bin_size",
+              label = "Bin Size:",
+              min = 100,
+              max = 1000,
+              value = 200,
+              step = 100
+            ),
+            shiny::sliderInput(
+              inputId = "step_size",
+              label = "Step Size",
+              min = 20,
+              max = 200,
+              value = 40,
+              step = 10
+            ),
+            shiny::radioButtons(
+              inputId = "control",
+              label = "Control Column",
+              choices = c(1, 2)
+            ),
+            shiny::downloadButton(outputId = "downloadFinalData",
+                                  label = "Download Data")
+          ),
+          shiny::mainPanel(
+            shiny::plotOutput(
+              outputId = "plot1",
+              height = 800,
+              width = 1200#,
+              # click = "plot_click"
+            ),
+            shiny::plotOutput(
+              outputId = "plot2",
+              height = 800,
+              width = 1200
+            ),
+            shiny::downloadButton(outputId = "downloadPData",
+                                  label = "Download P Values"),
+            shiny::plotOutput(
+              outputId = "plot3",
+              height = 800,
+              width = 1200
+            ),
+            shiny::downloadButton(outputId = "downloadJSData",
+                                  label = "Download JS Values"),
+            DT::dataTableOutput(outputId = "data_final_table")
+          )
+        )
+      ),
+      shiny::tabPanel(title = "LONGO Quotient",
+                      shiny::mainPanel(shiny::plotOutput(outputId = "plot4")))
+    )
+  )
 
   server <- shiny::shinyServer(function(input, output, session) {
     output$identifier <- shiny::renderUI(if (is.null(input$species)) {
@@ -171,7 +192,8 @@ LONGO <- function() {
         biomaRt::useMart("ENSEMBL_MART_ENSEMBL",
                          host = "www.ensembl.org",
                          dataset = input$species)
-      ensembl_attributes <- biomaRt::listAttributes(alldata.df$species_ensembl)
+      ensembl_attributes <-
+        biomaRt::listAttributes(alldata.df$species_ensembl)
       ensembl_attributes <- ensembl_attributes[1]
       shiny::selectInput(
         inputId = "attribute",
@@ -191,19 +213,21 @@ LONGO <- function() {
       P_data = NULL,
       JS_data = NULL,
       LQ_data = NULL,
-      status = "Please select options and start. Analysis can take up to a minute to complete. Please be patient",
+      status = "Please select options and start. Analysis can take up to a
+        minute to complete. Please be patient",
       labels = NULL,
       species_ensembl = NULL
     )
 
-    output$columns <- shiny::renderText(c(1,2,3))
+    output$columns <- shiny::renderText(c(1, 2, 3))
 
     shiny::observeEvent(list(input$datafile, input$sep, input$header), {
       if (is.null(input$datafile)) {
         return()
       }
       alldata.df$status <-
-        "Please select options and start. Analysis can take up to a minute to complete. Please be patient"
+        "Please select options and start. Analysis can take up to a minute
+           to complete. Please be patient"
       file1 <- input$datafile
       alldata.df$filedata <-
         read.csv(
@@ -221,13 +245,15 @@ LONGO <- function() {
     })
 
     shiny::observeEvent(input$action, {
-      if(is.null(input$datafile)){
+      if (is.null(input$datafile)) {
         alldata.df$status <- "Please load a file and then click submit"
         return()
       }
       message("calling biomart")
       temp2 <-
-        callbiomaRt(alldata.df$filedata, input$attribute, alldata.df$species_ensembl)
+        callbiomaRt(alldata.df$filedata,
+                    input$attribute,
+                    alldata.df$species_ensembl)
       message("calling dict")
       alldata.df$rawdata <- dict(alldata.df$filedata, temp2)
       temp1 <- analyze(
@@ -245,36 +271,44 @@ LONGO <- function() {
       alldata.df$P_data <- as.data.frame(temp1[2])
       alldata.df$JS_data <- as.data.frame(temp1[3])
       alldata.df$LQ_data <- as.data.frame(temp1[4])
-      updateRadioButtons(session = session,inputId = "control", choices = colnames(alldata.df$filedata)[2:(ncol(alldata.df$filedata))])
+      updateRadioButtons(
+        session = session,
+        inputId = "control",
+        choices = colnames(alldata.df$filedata)[2:(ncol(alldata.df$filedata))]
+      )
       alldata.df$status <- "Analysis completed"
     })
 
-    shiny::observeEvent(list(
-      input$bin_size,
-      input$step_size,
-      input$meanmedian,
-      input$highestmean,
-      input$control
-    ),
-    {
-      if (is.null(alldata.df$rawdata)) {
-        return()
-      }
-      temp1 <- analyze(
-        alldata.df$rawdata,
-        input$highestmean,
+    shiny::observeEvent(
+      list(
         input$bin_size,
         input$step_size,
         input$meanmedian,
-        input$filtered,
-        input$normalized,
-        (which(colnames(alldata.df$rawdata)==input$control))
-      )
-      alldata.df$finaldata <- as.data.frame(temp1[1])
-      alldata.df$P_data <- as.data.frame(temp1[2])
-      alldata.df$JS_data <- as.data.frame(temp1[3])
-      alldata.df$LQ_data <- as.data.frame(temp1[4])
-    })
+        input$highestmean,
+        input$control
+      ),
+      {
+        if (is.null(alldata.df$rawdata)) {
+          return()
+        }
+        temp1 <- analyze(
+          alldata.df$rawdata,
+          input$highestmean,
+          input$bin_size,
+          input$step_size,
+          input$meanmedian,
+          input$filtered,
+          input$normalized,
+          (which(
+            colnames(alldata.df$rawdata) == input$control
+          ))
+        )
+        alldata.df$finaldata <- as.data.frame(temp1[1])
+        alldata.df$P_data <- as.data.frame(temp1[2])
+        alldata.df$JS_data <- as.data.frame(temp1[3])
+        alldata.df$LQ_data <- as.data.frame(temp1[4])
+      }
+    )
 
     output$data_preview <- DT::renderDataTable({
       DT::datatable(alldata.df$filedata)
@@ -435,10 +469,26 @@ LONGO <- function() {
     })
     output$plot4 <- shiny::renderPlot({
       plot_data.df <- alldata.df$LQ_data
-      bp <- barplot(as.matrix(plot_data.df), axes = 1, ylim = c(-1,1), axisnames=FALSE)
+      bp <-
+        barplot(
+          as.matrix(plot_data.df),
+          axes = 1,
+          ylim = c(-1, 1),
+          axisnames = FALSE
+        )
       abline(h = 0.25, col = "red")
-      text(bp, par("usr")[3], labels = colnames(plot_data.df), srt = 45, adj = c(1.1,1.1), xpd = TRUE, cex = .9)
-      mtext(text = input$datafile, outer = TRUE, cex = 1.5)
+      text(
+        bp,
+        par("usr")[3],
+        labels = colnames(plot_data.df),
+        srt = 45,
+        adj = c(1.1, 1.1),
+        xpd = TRUE,
+        cex = .9
+      )
+      mtext(text = input$datafile,
+            outer = TRUE,
+            cex = 1.5)
 
     })
 
@@ -497,4 +547,3 @@ LONGO <- function() {
 
   shiny::shinyApp(ui, server)
 }
-

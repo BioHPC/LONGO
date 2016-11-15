@@ -15,6 +15,9 @@ openfile(FILE, SEP, HEADER, COMMENT_CHAR)
 
 \item{COMMENT_CHAR}{character used as commented lines to be ignored in the file}
 }
+\value{
+Returns nothing
+}
 \description{
 This is an internal functuon. This function opens a file
 and reads the data into a dataframe.

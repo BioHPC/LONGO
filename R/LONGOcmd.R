@@ -6,21 +6,30 @@
 #'
 #' @param FILE Address to the file to be analyzed
 #' @param SEP Option to specify the separated value, default=","
-#' @param HEADER Option to specify if there is a header in the file, default=TRUE
-#' @param COMMENT_CHAR Option to specify the commented character in the loaded file, default="!"
+#' @param HEADER Option to specify if there is a header in the file,
+#' default=TRUE
+#' @param COMMENT_CHAR Option to specify the commented character in the loaded
+#' file, default="!"
 #' @param SPECIES species name of the data based off the biomaRt database
-#' @param LIBRARY_TYPE the gene identifier of the data based off the biomaRt database
-#' @param MULTI_PROBES Option to change the method for handling multiple probes going to the same gene, default=highest
-#' @param WINDOW_SIZE Option to alter the size of the windows to be created from the dataframe, default=200
-#' @param STEP_SIZE Option to alter the size of the steps used to create the windows, default=40
-#' @param WINDOW_STYLE Option to alter the method used to create windows, default=mean
+#' @param LIBRARY_TYPE the gene identifier of the data based off the
+#' biomaRt database
+#' @param MULTI_PROBES Option to change the method for handling multiple probes
+#' going to the same gene, default=highest
+#' @param WINDOW_SIZE Option to alter the size of the windows to be created
+#' from the dataframe, default=200
+#' @param STEP_SIZE Option to alter the size of the steps used to create the
+#' windows, default=40
+#' @param WINDOW_STYLE Option to alter the method used to create windows,
+#' default=mean
 #' @param FILTERED Option to filter data, default=TRUE
 #' @param NORMALIZED Option to normalize data, default=TRUE
-#' @param CONTROL_COLUMN_INDEX column of the data used as a control for the statistical analysis
+#' @param CONTROL_COLUMN_INDEX column of the data used as a control for the
+#' statistical analysis
 #' @examples
 #' LONGOcmd(datafile)
 #' LONGOcmd(datafile, WINDOW_SIZE=100, STEP_SIZE=20)
 #' LONGOcmd(datafile, MULTI_PROBES="mean")
+#' @return Returns nothing
 #' @export
 LONGOcmd <- function(FILE,
                      SEP = ",",
@@ -51,7 +60,6 @@ LONGOcmd <- function(FILE,
                      host = "www.ensembl.org",
                      dataset = SPECIES)
   biomaRt.df <- callbiomaRt(data.df, LIBRARY_TYPE, species_ensembl)
-  #biomaRt.df <- read.table("LONGO_out_affy_table.tsv", sep="\t", header=TRUE)  # For fast testing
 
   # Use dict symbol and length
   message("* Hashing symbol and length")
