@@ -4,45 +4,45 @@
 \alias{LONGOcmd}
 \title{LONGO function}
 \usage{
-LONGOcmd(FILE, SEP = ",", HEADER = TRUE, COMMENT_CHAR = "!",
-  SPECIES = "hsapiens_gene_ensembl", LIBRARY_TYPE = "affy_primeview",
-  MULTI_PROBES = "highest", WINDOW_SIZE = 200, STEP_SIZE = 40,
-  WINDOW_STYLE = "mean", FILTERED = TRUE, NORMALIZED = TRUE,
-  CONTROL_COLUMN_INDEX = 2)
+LONGOcmd(fileLocation, separator = ",", header = TRUE, commentChar = "!",
+    species = "hsapiens_gene_ensembl", libraryType = "affy_primeview",
+    multiProbes = "mean", windowSize = 200, stepSize = 40,
+    windowStyle = "mean", filterData = TRUE, normalizeData = TRUE,
+    controlColumn = 2)
 }
 \arguments{
-\item{FILE}{Address to the file to be analyzed}
+\item{fileLocation}{Address to the file to be analyzed}
 
-\item{SEP}{Option to specify the separated value, default=","}
+\item{separator}{Option to specify the separated value, default=","}
 
-\item{HEADER}{Option to specify if there is a header in the file,
+\item{header}{Option to specify if there is a header in the file,
 default=TRUE}
 
-\item{COMMENT_CHAR}{Option to specify the commented character in the loaded
+\item{commentChar}{Option to specify the commented character in the loaded
 file, default="!"}
 
-\item{SPECIES}{species name of the data based off the biomaRt database}
+\item{species}{species name of the data based off the biomaRt database}
 
-\item{LIBRARY_TYPE}{the gene identifier of the data based off the
+\item{libraryType}{the gene identifier of the data based off the
 biomaRt database}
 
-\item{MULTI_PROBES}{Option to change the method for handling multiple probes
-going to the same gene, default=highest}
+\item{multiProbes}{Option to change the method for handling multiple
+probes going to the same gene, default=mean}
 
-\item{WINDOW_SIZE}{Option to alter the size of the windows to be created
+\item{windowSize}{Option to alter the size of the windows to be created
 from the dataframe, default=200}
 
-\item{STEP_SIZE}{Option to alter the size of the steps used to create the
+\item{stepSize}{Option to alter the size of the steps used to create the
 windows, default=40}
 
-\item{WINDOW_STYLE}{Option to alter the method used to create windows,
+\item{windowStyle}{Option to alter the method used to create windows,
 default=mean}
 
-\item{FILTERED}{Option to filter data, default=TRUE}
+\item{filterData}{Option to filter data, default=TRUE}
 
-\item{NORMALIZED}{Option to normalize data, default=TRUE}
+\item{normalizeData}{Option to normalize data, default=TRUE}
 
-\item{CONTROL_COLUMN_INDEX}{column of the data used as a control for the
+\item{controlColumn}{column of the data used as a control for the
 statistical analysis}
 }
 \value{
@@ -54,8 +54,12 @@ analysis of data. Please use the shiny interface first to get an
 understanding of how this package analyzes data.
 }
 \examples{
-LONGOcmd(datafile)
-LONGOcmd(datafile, WINDOW_SIZE=100, STEP_SIZE=20)
-LONGOcmd(datafile, MULTI_PROBES="mean")
+LONGOcmd(exampleData, species = "mmusculus_gene_ensembl",
+libraryType = "affy_mouse430a_2")
+\donttest{
+LONGOcmd("~/data.csv")
+LONGOcmd("~/data.csv", windowSize=100, stepSize=20)
+LONGOcmd("~/data.csv", multiProbes="mean")
+}
 }
 

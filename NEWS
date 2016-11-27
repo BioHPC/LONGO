@@ -1,0 +1,6 @@
+Changes in version 0.2.1 (2016-11-26)
+- Fixed long gene quotient
+- Removed genes less than median before completing analysis
+- Altered variable names
+Changes in version 0.2.0 (2016-11-15)
+- Updated Readme and Vignette files

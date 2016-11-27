@@ -1,149 +1,135 @@
 ---
 title: "LONGO: Long gene expression as a metric for neuronal identity"
-author: "Alex Paul"
+author: "Alexander Paul, Matthew McCoy, Tae-Hyuk (Ted) Ahn, Andrew Yoo"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+    %\VignetteIndexEntry{Vignette Title}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
 ---
 ## LONGO
 
-LONGO is designed to have two different uses. One through a shiny interface and another through R. Both of the results of these uses of the program are the same. The shiny interface will allow the user to alter certain variables in the analysis to see how they will affect the final result. This can be useful when interpreting new data. 
+LONGO is designed to have two different uses. One through a shiny interface 
+and another through R. Both results of these uses of the program are 
+the same. The shiny interface will allow the user to alter certain variables
+in the analysis to see how they will affect the result. This can be 
+useful when interpreting new data. 
 
-LONGO is designed to take in a data file, take the gene identifier to get the gene name and length. Occasionally there will be multiple probes going to a single gene. LONGO can handle this in two different ways. The default way is by only keeping the probe that has the highest overall expression values. The other option is to get the mean expression values. If a read has no identified gene name or length in biomaRt, the read is removed. 
+LONGO is designed to take in a data file with a gene identifier to get 
+the gene name and length. Occasionally there will be multiple probes going
+to a single gene. LONGO can handle this in two different ways. The default way
+is to get the mean expression values. The other option is by only keeping the
+probe that has the highest overall expression values. If a read has no
+identified gene name or length in Biomart, the read is removed. 
 
-After getting the gene names and lengths the data is sorted by length. A rolling window is used to create bins. The user can change the size of the window as well as the step size of the window. 
+After getting the gene names and lengths the data is sorted by length. A
+rolling window is used to create bins. The user can change the size of the
+window as well as the step size of the window. These rolling window values 
+are then plotted. The P value plot shows the p value comparisons of the values
+making up the windows to the window values in the control. 
+
 
 ## Prerequisites:
 
 ### Bioconductor packages:  
-  - biomaRt  
+- biomaRt  
 ```{} 
     source("https://bioconductor.org/biocLite.R")  
     biocLite("biomaRt")
 ```
-  - edgeR  
+- edgeR  
 ```{}
     source("https://bioconductor.org/biocLite.R")  
     biocLite("edgeR")  
 ```
-  - preprocessCore  
+- preprocessCore  
 ```{}
     source("https://bioconductor.org/biocLite.R")  
     biocLite("preprocessCore")
 ```  
 
 ###  CRAN packages:  
-  - shiny  
+- shiny  
 ```{}
     install.packages("shiny") 
 ```  
-  - DT
+- DT  
 ```{}
     install.packages("DT") 
 ```
-  - data.table
+- data.table  
 ```{}
     install.packages("data.table") 
 ```
-  - hash
+- hash  
 ```{}
     install.packages("hash") 
 ```
-  
-## Usage:
+
+## Workflow/Usage:
 
 ### LONGO():
-The LONGO function allows the user to input the intitial variables to get a
-result and then allows the user to alter some of the variables and see how 
-they will change the results. 
+The LONGO function allows the user to input the initial variables to get a
+result and then allows the user to alter input variables altering the output.
 ```{}
-  LONGO()
+    LONGO()
 ```
+- Load data
+    - Selecting options for data file
+- Select species of data
+- Select gene identifier used in the data
+    - Make sure gene identifier is in the first column
+- Confirm data is accurate, click submit
+- Wait until the analysis completes
+- Data Table output tab has the gene name, length associated with inputted data
+- LONGO Output tab has the LONGO plot and few other statistical plots
+    - Can adjust certain variables to see how they affect the LONGO plot
+- LONGO Quotient tab has the LONGO quotient plot
+- The raw data for all of these plots are available to be downloaded 
+via download buttons
+
 
 ### LONGOcmd():
 The LONGOcmd function will automatically write the output data files to your 
 working directory. This can allow faster data analysis if you know the values
 to use. 
+The shiny interface is more beginner friendly while the LONGOcmd() 
+requires more specific knowledge at the start. The LONGOcmd() function uses
+the same techniques but requires only the initial input. If you know the Biomart
+species database and gene identifier, you can use this for faster analysis. 
+The examples below is a data file that is included in the 
+LONGO package. The output files are written to the working directory. 
 ```{}
-   LONGOcmd("~/data.tsv")
-   LONGOcmd("~/data.tsv", SEP = "\t")
-   LONGOcmd("~/data.tsv", WINDOW_SIZE = 350, MULTI_PROBES = "mean", FILTERED = FALSE)
+    LONGOcmd(exampleData, SPECIES = "mmusculus_gene_ensembl",
+        LIBRARY_TYPE = "affy_mouse430a_2")
+    
+    LONGOcmd(exampleData, SPECIES = "mmusculus_gene_ensembl",
+        LIBRARY_TYPE = "affy_mouse430a_2")
+    
+    LONGOcmd(exampleData, SPECIES = "mmusculus_gene_ensembl",
+        LIBRARY_TYPE = "affy_mouse430a_2", WINDOW_SIZE = 350, 
+        MULTI_PROBES = "highest", FILTERED = FALSE)
 ```
 
 
-## BiomaRt identifier
 
+## Biomart identifier (as of `r Sys.Date()`)
+Below is a list of all the Biomart datasets available. 
 ```{r, echo=FALSE}
-   biomaRt::listDatasets(biomaRt::useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org"))[1]
+    biomaRt::listDatasets(biomaRt::useMart("ENSEMBL_MART_ENSEMBL", 
+        host = "www.ensembl.org"))[1]
 ```
 
-```{r, echo=FALSE}
-   biomaRt::listAttributes(biomaRt::useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org",
-                         dataset = "hsapiens_gene_ensembl"))[1]
+Once the dataset is selected from above it is possible to get a list of possible
+gene identifies using the following command, where 'speciesDataset' is equal to
+a dataset from the above list.
+```{}
+    ensembl <- biomaRt::useMart("ENSEMBL_MART_ENSEMBL", 
+        host = "www.ensembl.org", dataset=speciesDataset)
 ```
 
-## Output
-
-### LONGO Data
-show output data...
-
-### LONGO Plot
-show output plot
-
-### JS Distance
-show output plot
-
-
-
-
-
-
-
-
-this is for my reference. will be removed,....
-
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+For the LONGO analysis, the "external_gene_name" was used as the source of 
+the gene name. This was used to determine if there were duplicate reads. The 
+method for handling these repeats is based on the input variable of 
+"MULTI_PROBES". 
