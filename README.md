@@ -26,31 +26,55 @@ making up the windows to the window values in the control.
 
 *   biomaRt package
     *   install by using the following R commands:  
+
             > source("https://bioconductor.org/biocLite.R")  
-            > biocLite("biomaRt")
+            > biocLite("biomaRt")  
+
 *   edgeR package
     *   install by using the following R commands:  
+
             > source("https://bioconductor.org/biocLite.R")  
-            > biocLite("edgeR"")
+            > biocLite("edgeR"")  
+
 *   preprocessCore package
     *   install by using the following R commands:  
+
             > source("https://bioconductor.org/biocLite.R")  
-            > biocLite("preprocessCore")
+            > biocLite("preprocessCore")  
+
 *   shiny package:
-    *   install by using the following R commands:  
+    *   install by using the following R command:  
+
             > install.packages("shiny")  
+
 *   DT package
-    *   install by using the following R commands:  
+    *   install by using the following R command:  
+
             > install.packages("DT")  
+            
 *   data.table package
-    *   install by using the following R commands:  
-            > install.packages("data.table")
+    *   install by using the following R command:  
+
+            > install.packages("data.table")  
 
 *   hash package:
     *   install by using the following R command:  
-            > install.packages("hash")
 
+            > install.packages("hash") 
 
+# Installing LONGO Package:
+To install the LONGO package all the prerequisites above need to be installed.
+After confirming those packages are installed start RStudio. From there follow
+the instructions below: 
+ 
+*	Tools dropdown -> Install Packages… 
+*	Change the Install from dropdown to Package Archive File 
+*	Locate the LONGO tarball (LONGO_0.2.2.tar.gz) 
+*	Click install 
+
+Another option is to use the follow R line: 
+
+ 	> install.packages(“~/LONGO_0.2.2.tar.gz”, repos = NULL, type = “source”) 
 
 # Pre-processing:
 In order to use LONGO the data needs to be in a specific format. This format
