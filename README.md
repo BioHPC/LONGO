@@ -60,7 +60,7 @@ directory has multiple examples of pre-processing.
 
 
 #Usage with LONGO():
-- Launch LONGO 
+- Launch LONGO  
     > LONGO() 
 - Load pre-processed data
     - Select options for data file
