@@ -55,7 +55,7 @@ making up the windows to the window values in the control.
 # Pre-processing:
 In order to use LONGO the data needs to be in a specific format. This format
 has the gene identifier in the first column and all of the other columns are 
-expression values. The first row can be a header. The script file in the LONGO
+expression values. The first row can be a header. The script file in the LONGO-script
 directory has multiple examples of pre-processing.
 
 
