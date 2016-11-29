@@ -1,8 +1,11 @@
 ---
 title: "LONGO: Long gene expression as a metric for neuronal identity"
-author: "Alexander Paul, Matthew McCoy, Tae-Hyuk (Ted) Ahn, Andrew Yoo"
+author: "Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, 
+Andrew Yoo"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+    rmarkdown::html_vignette
+    #word_document
 vignette: >
     %\VignetteIndexEntry{Vignette Title}
     %\VignetteEngine{knitr::rmarkdown}
@@ -11,7 +14,7 @@ vignette: >
 ## LONGO
 
 LONGO is designed to have two different uses. One through a shiny interface 
-and another through R. Both results of these uses of the program are 
+and another through R. Both of results of the program are 
 the same. The shiny interface will allow the user to alter certain variables
 in the analysis to see how they will affect the result. This can be 
 useful when interpreting new data. 
@@ -19,16 +22,15 @@ useful when interpreting new data.
 LONGO is designed to take in a data file with a gene identifier to get 
 the gene name and length. Occasionally there will be multiple probes going
 to a single gene. LONGO can handle this in two different ways. The default way
-is to get the mean expression values. The other option is by only keeping the
+is to get the mean expression values. The other option is to only keep the
 probe that has the highest overall expression values. If a read has no
-identified gene name or length in Biomart, the read is removed. 
+identified gene name or length in BioMart, the read is removed. 
 
 After getting the gene names and lengths the data is sorted by length. A
 rolling window is used to create bins. The user can change the size of the
 window as well as the step size of the window. These rolling window values 
 are then plotted. The P value plot shows the p value comparisons of the values
 making up the windows to the window values in the control. 
-
 
 ## Prerequisites:
 
@@ -67,40 +69,57 @@ making up the windows to the window values in the control.
     install.packages("hash") 
 ```
 
-## Workflow/Usage:
+## Usage:
+
+### Pre-processing:
+In order to use LONGO the data needs to be in a specific format. This format
+has the gene identifier in the first column and all of the other columns are 
+expression values. The first row can be a header. The script file in the LONGO
+directory has multiple examples of pre-processing.
 
 ### LONGO():
-The LONGO function allows the user to input the initial variables to get a
-result and then allows the user to alter input variables altering the output.
+The LONGO function allows the user to input initial variables complete an
+initial analysis with the default inputs. Then the user can alter some of the 
+variables used in the analysis. A general workflow is given below. Start the
+shiny interface using:
 ```{}
     LONGO()
 ```
-- Load data
-    - Selecting options for data file
-- Select species of data
-- Select gene identifier used in the data
+- Load pre-processed data
+    - Select options for data file
+- Select species
+- Select gene identifier
     - Make sure gene identifier is in the first column
 - Confirm data is accurate, click submit
 - Wait until the analysis completes
-- Data Table output tab has the gene name, length associated with inputted data
+- Data Table output tab has the gene name, length for the data
 - LONGO Output tab has the LONGO plot and few other statistical plots
-    - Can adjust certain variables to see how they affect the LONGO plot
-- LONGO Quotient tab has the LONGO quotient plot
+    - Can adjust certain variables to see how they affect the plots
+- Long Gene Quotient tab has the long gene quotient plot
 - The raw data for all of these plots are available to be downloaded 
 via download buttons
 
 
 ### LONGOcmd():
-The LONGOcmd function will automatically write the output data files to your 
+The LONGOcmd function will automatically write the output data files to your
 working directory. This can allow faster data analysis if you know the values
-to use. 
-The shiny interface is more beginner friendly while the LONGOcmd() 
+to use. LONGOcmd can also be used with an R dataframe as the input file as long
+as it satisfies the format described in the pre-processing section above.
+The shiny interface is more beginner friendly while the LONGOcmd()
 requires more specific knowledge at the start. The LONGOcmd() function uses
-the same techniques but requires only the initial input. If you know the Biomart
-species database and gene identifier, you can use this for faster analysis. 
-The examples below is a data file that is included in the 
-LONGO package. The output files are written to the working directory. 
+the same techniques but requires only the initial input. If you know the BioMart
+species database and gene identifier, you can use this for faster analysis.
+The first example gives an overview of the possible input variables and their
+defaults. The other examples use a data file that is included in the LONGO
+package. 
 ```{}
+    LONGOcmd(fileLocation = path_to_file, {separator = ","},
+        {header = TRUE}, {commentChar = "!"},
+        {species = "hsapiens_gene_ensembl"}, 
+        {libraryType = "affy_primeview"}, {multiProbes = "mean"},
+        {windowSize = 200}, {stepSize = 40}, {windowStyle = "mean"},
+        {filterData = TRUE}, {normalizeData = TRUE}, {controlColumn = 2})
+            
     LONGOcmd(exampleData, SPECIES = "mmusculus_gene_ensembl",
         LIBRARY_TYPE = "affy_mouse430a_2")
     
@@ -113,23 +132,22 @@ LONGO package. The output files are written to the working directory.
 ```
 
 
-
 ## Biomart identifier (as of `r Sys.Date()`)
-Below is a list of all the Biomart datasets available. 
+Below is a list of all the Biomart data sets available. 
 ```{r, echo=FALSE}
     biomaRt::listDatasets(biomaRt::useMart("ENSEMBL_MART_ENSEMBL", 
         host = "www.ensembl.org"))[1]
 ```
 
-Once the dataset is selected from above it is possible to get a list of possible
+Once the data set is selected from above it is possible to get a list of possible
 gene identifies using the following command, where 'speciesDataset' is equal to
-a dataset from the above list.
+a data set from the above list.
 ```{}
     ensembl <- biomaRt::useMart("ENSEMBL_MART_ENSEMBL", 
-        host = "www.ensembl.org", dataset=speciesDataset)
+        host = "www.ensembl.org", dataset=<speciesDataset>)
 ```
 
-For the LONGO analysis, the "external_gene_name" was used as the source of 
-the gene name. This was used to determine if there were duplicate reads. The 
-method for handling these repeats is based on the input variable of 
-"MULTI_PROBES". 
+For the LONGO analysis, the "external_gene_name" from the BioMart data set
+was used as the source of the gene name. This was used to determine if there
+were duplicate reads. The method for handling these repeats is based on the
+input variable of "MULTI_PROBES"

@@ -10,9 +10,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Alexander Paul, Matthew McCoy, Tae-Hyuk (Ted) Ahn, Andrew Yoo" />
+<meta name="author" content="Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo" />
 
-<meta name="date" content="2016-11-26" />
+<meta name="date" content="2016-11-29" />
 
 <title>LONGO: Long gene expression as a metric for neuronal identity</title>
 
@@ -31,15 +31,15 @@
 
 
 <h1 class="title toc-ignore">LONGO: Long gene expression as a metric for neuronal identity</h1>
-<h4 class="author"><em>Alexander Paul, Matthew McCoy, Tae-Hyuk (Ted) Ahn, Andrew Yoo</em></h4>
-<h4 class="date"><em>2016-11-26</em></h4>
+<h4 class="author"><em>Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo</em></h4>
+<h4 class="date"><em>2016-11-29</em></h4>
 
 
 
 <div id="longo" class="section level2">
 <h2>LONGO</h2>
-<p>LONGO is designed to have two different uses. One through a shiny interface and another through R. Both results of these uses of the program are the same. The shiny interface will allow the user to alter certain variables in the analysis to see how they will affect the result. This can be useful when interpreting new data.</p>
-<p>LONGO is designed to take in a data file with a gene identifier to get the gene name and length. Occasionally there will be multiple probes going to a single gene. LONGO can handle this in two different ways. The default way is to get the mean expression values. The other option is by only keeping the probe that has the highest overall expression values. If a read has no identified gene name or length in Biomart, the read is removed.</p>
+<p>LONGO is designed to have two different uses. One through a shiny interface and another through R. Both of results of the program are the same. The shiny interface will allow the user to alter certain variables in the analysis to see how they will affect the result. This can be useful when interpreting new data.</p>
+<p>LONGO is designed to take in a data file with a gene identifier to get the gene name and length. Occasionally there will be multiple probes going to a single gene. LONGO can handle this in two different ways. The default way is to get the mean expression values. The other option is to only keep the probe that has the highest overall expression values. If a read has no identified gene name or length in BioMart, the read is removed.</p>
 <p>After getting the gene names and lengths the data is sorted by length. A rolling window is used to create bins. The user can change the size of the window as well as the step size of the window. These rolling window values are then plotted. The P value plot shows the p value comparisons of the values making up the windows to the window values in the control.</p>
 </div>
 <div id="prerequisites" class="section level2">
@@ -72,37 +72,48 @@ biocLite(&quot;preprocessCore&quot;)</code></pre></li>
 </ul>
 </div>
 </div>
-<div id="workflowusage" class="section level2">
-<h2>Workflow/Usage:</h2>
+<div id="usage" class="section level2">
+<h2>Usage:</h2>
+<div id="pre-processing" class="section level3">
+<h3>Pre-processing:</h3>
+<p>In order to use LONGO the data needs to be in a specific format. This format has the gene identifier in the first column and all of the other columns are expression values. The first row can be a header. The script file in the LONGO directory has multiple examples of pre-processing.</p>
+</div>
 <div id="longo-1" class="section level3">
 <h3>LONGO():</h3>
-<p>The LONGO function allows the user to input the initial variables to get a result and then allows the user to alter input variables altering the output.</p>
+<p>The LONGO function allows the user to input initial variables complete an initial analysis with the default inputs. Then the user can alter some of the variables used in the analysis. A general workflow is given below. Start the shiny interface using:</p>
 <pre><code>    LONGO()</code></pre>
 <ul>
-<li>Load data
+<li>Load pre-processed data
 <ul>
-<li>Selecting options for data file</li>
+<li>Select options for data file</li>
 </ul></li>
-<li>Select species of data</li>
-<li>Select gene identifier used in the data
+<li>Select species</li>
+<li>Select gene identifier
 <ul>
 <li>Make sure gene identifier is in the first column</li>
 </ul></li>
 <li>Confirm data is accurate, click submit</li>
 <li>Wait until the analysis completes</li>
-<li>Data Table output tab has the gene name, length associated with inputted data</li>
+<li>Data Table output tab has the gene name, length for the data</li>
 <li>LONGO Output tab has the LONGO plot and few other statistical plots
 <ul>
-<li>Can adjust certain variables to see how they affect the LONGO plot</li>
+<li>Can adjust certain variables to see how they affect the plots</li>
 </ul></li>
-<li>LONGO Quotient tab has the LONGO quotient plot</li>
+<li>Long Gene Quotient tab has the long gene quotient plot</li>
 <li>The raw data for all of these plots are available to be downloaded via download buttons</li>
 </ul>
 </div>
 <div id="longocmd" class="section level3">
 <h3>LONGOcmd():</h3>
-<p>The LONGOcmd function will automatically write the output data files to your working directory. This can allow faster data analysis if you know the values to use. The shiny interface is more beginner friendly while the LONGOcmd() requires more specific knowledge at the start. The LONGOcmd() function uses the same techniques but requires only the initial input. If you know the Biomart species database and gene identifier, you can use this for faster analysis. The examples below is a data file that is included in the LONGO package. The output files are written to the working directory.</p>
-<pre><code>    LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
+<p>The LONGOcmd function will automatically write the output data files to your working directory. This can allow faster data analysis if you know the values to use. LONGOcmd can also be used with an R dataframe as the input file as long as it satisfies the format described in the pre-processing section above. The shiny interface is more beginner friendly while the LONGOcmd() requires more specific knowledge at the start. The LONGOcmd() function uses the same techniques but requires only the initial input. If you know the BioMart species database and gene identifier, you can use this for faster analysis. The first example gives an overview of the possible input variables and their defaults. The other examples use a data file that is included in the LONGO package.</p>
+<pre><code>    LONGOcmd(fileLocation = path_to_file, {separator = &quot;,&quot;},
+        {header = TRUE}, {commentChar = &quot;!&quot;},
+        {species = &quot;hsapiens_gene_ensembl&quot;}, 
+        {libraryType = &quot;affy_primeview&quot;}, {multiProbes = &quot;mean&quot;},
+        {windowSize = 200}, {stepSize = 40}, {windowStyle = &quot;mean&quot;},
+        {filterData = TRUE}, {normalizeData = TRUE}, {controlColumn = 2})
+            
+    LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
         LIBRARY_TYPE = &quot;affy_mouse430a_2&quot;)
     
     LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
@@ -113,9 +124,9 @@ biocLite(&quot;preprocessCore&quot;)</code></pre></li>
         MULTI_PROBES = &quot;highest&quot;, FILTERED = FALSE)</code></pre>
 </div>
 </div>
-<div id="biomart-identifier-as-of-2016-11-26" class="section level2">
-<h2>Biomart identifier (as of 2016-11-26)</h2>
-<p>Below is a list of all the Biomart datasets available.</p>
+<div id="biomart-identifier-as-of-2016-11-29" class="section level2">
+<h2>Biomart identifier (as of 2016-11-29)</h2>
+<p>Below is a list of all the Biomart data sets available.</p>
 <pre><code>##                           dataset
 ## 1          oanatinus_gene_ensembl
 ## 2         cporcellus_gene_ensembl
@@ -186,10 +197,10 @@ biocLite(&quot;preprocessCore&quot;)</code></pre></li>
 ## 67          meugenii_gene_ensembl
 ## 68           btaurus_gene_ensembl
 ## 69       cfamiliaris_gene_ensembl</code></pre>
-<p>Once the dataset is selected from above it is possible to get a list of possible gene identifies using the following command, where ‘speciesDataset’ is equal to a dataset from the above list.</p>
+<p>Once the data set is selected from above it is possible to get a list of possible gene identifies using the following command, where ‘speciesDataset’ is equal to a data set from the above list.</p>
 <pre><code>    ensembl &lt;- biomaRt::useMart(&quot;ENSEMBL_MART_ENSEMBL&quot;, 
-        host = &quot;www.ensembl.org&quot;, dataset=speciesDataset)</code></pre>
-<p>For the LONGO analysis, the “external_gene_name” was used as the source of the gene name. This was used to determine if there were duplicate reads. The method for handling these repeats is based on the input variable of “MULTI_PROBES”.</p>
+        host = &quot;www.ensembl.org&quot;, dataset=&lt;speciesDataset&gt;)</code></pre>
+<p>For the LONGO analysis, the “external_gene_name” from the BioMart data set was used as the source of the gene name. This was used to determine if there were duplicate reads. The method for handling these repeats is based on the input variable of “MULTI_PROBES”</p>
 </div>
 
 
