@@ -129,15 +129,15 @@ LONGO <- function() {
                         shiny::radioButtons(inputId="control",
                             label="Control Column",
                             choices=c(1, 2)
-                        ),
-                        shiny::downloadButton(outputId="downloadFinalData",
-                            label="Download Data"
                         )
                     ),
                     shiny::mainPanel(
                         shiny::plotOutput(outputId="plot1",
                             height=800,
                             width=1200
+                        ),
+                        shiny::downloadButton(outputId="downloadFinalData",
+                            label="Download Data"
                         ),
                         shiny::plotOutput(outputId="plot2",
                             height=800,
@@ -158,7 +158,12 @@ LONGO <- function() {
                 )
             ),
             shiny::tabPanel(title="Long Gene Quotient",
-                shiny::mainPanel(shiny::plotOutput(outputId="plot4"))
+                shiny::mainPanel(
+                    shiny::plotOutput(outputId="plot4"),
+                    shiny::downloadButton(outputId="downloadLongGeneQValues",
+                        label="Download Long Gene Quotient Values"
+                    )
+                )
             )
         )
     })
@@ -297,19 +302,19 @@ LONGO <- function() {
             data.df.analyzed <- alldata.df$finaldata
             if (input$scale == "linear") {
                 x_vals <- (data.df.analyzed$kb_length)
-                x_lab <- "Gene length in KB"
+                x_lab <- "Gene length (kb)"
             }
             else{
                 # log
                 x_vals <- log(data.df.analyzed$kb_length)
-                x_lab <- "Log(Gene Length)"
+                x_lab <- "Log(Gene length (kb))"
             }
             ymax <-(max(data.df.analyzed[, 2:(ncol(data.df.analyzed))]) * 1.2)
             yminim <- min(data.df.analyzed[, 2:(ncol(data.df.analyzed))])
             # png("LONGO_out.png", width=6, height=6, units="in", res=300)
             matplot(x=x_vals, y=data.df.analyzed[, 2], type="l",
                 col=1, xlab=x_lab, ylim=c(yminim, ymax),
-                ylab="expression Level", main="LONGO Plot"
+                ylab="Gene expression (a.u.)", main="LONGO Plot"
             )
             for (i in 3:ncol(data.df.analyzed)) {
                 par(new=TRUE)
@@ -332,7 +337,7 @@ LONGO <- function() {
 
             if (input$scale == "linear") {
                 x_vals <- (data.df.analyzed$kb_length)
-                x_lab <- "Gene length in KB"
+                x_lab <- "Gene length (kb)"
             }
             else{
                 # log
@@ -363,7 +368,7 @@ LONGO <- function() {
             data.df.analyzed <- alldata.df$diverg_data
             if (input$scale == "linear") {
                 x_vals <- (data.df.analyzed$kb_length)
-                x_lab <- "Gene length in KB"
+                x_lab <- "Gene length (kb)"
             }
             else{
                 # log
@@ -374,7 +379,7 @@ LONGO <- function() {
             yminim <- min(data.df.analyzed[, 2:(ncol(data.df.analyzed))])
             matplot(x=x_vals, y=data.df.analyzed[, 2], type="l",
                 col=1, xlab=x_lab, ylim=c(yminim, ymax),
-                ylab="Divergence-distance",
+                ylab="Partial JS distance",
                 main="LONGO Divergence Plot"
             )
             for (i in 3:ncol(data.df.analyzed)) {
@@ -443,6 +448,16 @@ LONGO <- function() {
             content=function(file) {
                 write.csv(x=alldata.df$diverg_data, file=file,
                     row.names=FALSE)
+            }
+        )
+
+        output$downloadLongGeneQValues <- shiny::downloadHandler(
+            filename=function() {
+                paste("LONGO_out_Long_Gene_Quotient_Values_", input$datafile, sep="")
+            },
+            content=function(file) {
+                write.csv(x=alldata.df$LQ_data, file=file,
+                          row.names=FALSE)
             }
         )
 

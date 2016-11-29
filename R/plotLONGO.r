@@ -21,8 +21,8 @@ plotLONGO <- function(simp.df) {
         y = simp.df[, 2],
         type = "l",
         col = 1,
-        xlab = "gene length",
-        ylab = "expression",
+        xlab = "Gene length (kb)",
+        ylab = "Gene expression",
         ylim = c(yminim, ymax),
         main = "LONGO output"
     )

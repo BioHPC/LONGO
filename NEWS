@@ -1,3 +1,6 @@
+Changes in version 0.2.3 (2016-11-29)
+- Changed plot labels
+- Changed exampleData for examples
 Changes in version 0.2.2 (2016-11-29)
 - Updated README and vignette files
 Changes in version 0.2.1 (2016-11-26)
