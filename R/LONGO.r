@@ -206,7 +206,8 @@ LONGO <- function() {
 
         output$columns <- shiny::renderText(c(1, 2, 3))
 
-        shiny::observeEvent(list(input$datafile, input$sep, input$header), {
+        shiny::observeEvent(list(input$datafile, input$sep, input$header,
+            input$species, input$identifier), {
             if (is.null(input$datafile)) {
                 return()
             }
@@ -229,16 +230,18 @@ LONGO <- function() {
 
         shiny::observeEvent(input$action, {
                 if (is.null(input$datafile)) {
-                    alldata.df$status <- "Please load a file and
-                        then click submit"
+                    alldata.df$status <- paste0("Please load a file and
+                        then click submit", Sys.time())
                     return()
                 }
+
             temp2 <- callbiomaRt(alldata.df$filedata, input$attribute,
                 alldata.df$species_ensembl)
             if(is.null(temp2)){
-                alldata.df$status <-"The gene identifier or the species
+                alldata.df$status <-paste("The gene identifier or the species
                 selected was incorrect for the uploaded data. Please select
-                the correct species and gene identifier for your data."
+                the correct species and gene identifier for your data. ",
+                Sys.time())
                 return()
             }
             alldata.df$rawdata <- dict(alldata.df$filedata, temp2)
@@ -247,9 +250,9 @@ LONGO <- function() {
                 input$filter, input$normalize, 2
             )
             if(is.null(temp1)){
-                alldata.df$status <-"There were less than 200 genes identified
+                alldata.df$status <- paste0("There were less than 200 genes identified
                 with the species and gene identifier. Please make sure you have
-                the correct inputs for your data and resubmit."
+                the correct inputs for your data and resubmit. ", Sys.time())
                 return()
             }
 
@@ -262,7 +265,7 @@ LONGO <- function() {
                 choices =
                 colnames(alldata.df$filedata)[2:(ncol(alldata.df$filedata))]
             )
-            alldata.df$status <- "Analysis completed"
+            alldata.df$status <- paste0("Analysis completed ", Sys.time())
         })
 
         shiny::observeEvent(
@@ -289,12 +292,12 @@ LONGO <- function() {
             DT::datatable(alldata.df$filedata)
         })
 
-        output$ui.action <- shiny::renderUI({
-            if (is.null(input$datafile)) {
-                return (NULL)
-            }
-            shiny::actionButton(inputId="action", label="Submit")
-        })
+#        output$ui.action <- shiny::renderUI({
+#            if (is.null(input$datafile)) {
+##                return (NULL)
+#            }
+#            shiny::actionButton(inputId="action", label="Submit")
+#        })
 
         output$data_annotated <- DT::renderDataTable(alldata.df$rawdata)
 

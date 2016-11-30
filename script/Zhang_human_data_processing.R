@@ -39,6 +39,8 @@ write.table(data.df, file = paste(out.filename, "SampleMeans.csv", sep = "_"), s
 # LONGO processing information
 ########################################################################################
 
+# Species: Hspaiens
+# Gene ID: external_gene_name
 # Quantile normalized
 # Data filtered (>1 cpm for at least 4 samples)
 # Sliding median

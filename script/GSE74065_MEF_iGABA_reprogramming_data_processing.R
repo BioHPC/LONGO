@@ -13,6 +13,9 @@
 # LONGO processing information
 ########################################################################################
 
+# Species: Mmusculus
+# Gene ID: ensembl_gene_id
+# Data filtered (>1 cpm for at least 4 samples)
 # Quantile normalized
 # Sliding median
 # Multi probe values averaged

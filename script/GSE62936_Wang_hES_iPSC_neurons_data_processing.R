@@ -72,6 +72,8 @@ write.table(data.df, file = "GSE62936_Wang_hES_iPSC_neurons_FPKM.csv", sep = ","
 # LONGO processing information
 ########################################################################################
 
+# Species: Hsapiens
+# Gene ID: external_gene_name
 # Quantile normalized
 # Data filtered (>1 cpm for at least 4 samples)
 # Sliding median

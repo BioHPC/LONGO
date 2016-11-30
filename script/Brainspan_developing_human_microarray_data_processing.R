@@ -51,6 +51,8 @@ write.table(data.df, file = "Brainspan_developing_human_microarray.processed.csv
 # LONGO processing information
 ########################################################################################
 
+# Species: Hsapiens
+# Gene ID: external_gene_name
 # Quantile normalized
 # Sliding median
 # Multi probe values averaged

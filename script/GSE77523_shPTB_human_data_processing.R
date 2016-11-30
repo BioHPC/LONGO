@@ -11,6 +11,8 @@
 # LONGO processing information
 ########################################################################################
 
+# Species: Hsapiens
+# Gene ID: external_gene_name
 # Quantile normalized
 # Data filtered (>1 cpm for at least 4 samples)
 # Sliding median

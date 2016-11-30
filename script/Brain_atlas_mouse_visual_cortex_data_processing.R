@@ -37,6 +37,8 @@ write.table(data.df, file = paste(out.filename, "processed.csv", sep = "_"), sep
 # LONGO processing information
 ########################################################################################
 
+# Species: Mmusculus
+# Gene ID: external_gene_name
 # Quantile normalized
 # Data filtered (>1 cpm for at least 4 samples)
 # Sliding median

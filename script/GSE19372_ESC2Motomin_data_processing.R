@@ -12,10 +12,10 @@ write.table(data.df, file = "GSE19372_ESC2Motomin.csv", sep = ",")
 # LONGO processing information
 ########################################################################################
 
+# Species: Mmusculus
+# Gene ID: affy_mouse430_2
 # Quantile normalized
-# Data filtered (>1 cpm for at least 4 samples)
 # Sliding median
 # Multi probe values averaged
 # Bin size: 200
 # Step size: 40
-# Control column:

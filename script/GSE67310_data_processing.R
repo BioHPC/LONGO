@@ -26,6 +26,8 @@ write.table(data.df, file = paste(out.filename, "SampleMeans.csv", sep = "_"), s
 # LONGO processing information
 ########################################################################################
 
+# Species: Mmusculus
+# Gene ID: external_gene_name
 # Quantile normalized
 # Sliding median
 # Multi probe values averaged

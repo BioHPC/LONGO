@@ -32,6 +32,8 @@ write.table(data.df, file = paste(out.filename, "TissueMeans.csv", sep = "_"), s
 # LONGO processing information
 ########################################################################################
 
+# Species: Rnorvegicus
+# Gene ID: external_gene_name
 # Quantile normalized
 # Sliding median
 # Multi probe values averaged

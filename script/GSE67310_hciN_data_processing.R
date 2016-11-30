@@ -13,6 +13,8 @@
 # LONGO processing information
 ########################################################################################
 
+# Species: Hsapiens
+# Gene ID: affy_primeview
 # Quantile normalized
 # Sliding median
 # Multi probe values averaged
