@@ -13,7 +13,31 @@ Author: c(person("Alexander Paul", email="apaul7@slu.edu"), person("Tae-
 Maintainer: Alex Paul <apaul7@slu.edu>
 Description: Tool used to interpret the long gene expression values. This can
     be done through the shiny app or through a R function.
-License: GPL-3
+License: Copyright (c) <2016> <Washington University and St. Louis University>
+<Matthew J. McCoy, Alexander J. Paul, Haijun Gong, Tae-Hyuk (Ted) Ahn and Andrew S. Yoo>
+Permission is hereby granted, free of charge, to any academic, government, 
+    and non-profit/not-for-profit institutions obtaining a copy of this software 
+    and associated documentation files (the "Software"), to deal in the Software 
+    without restriction, including without limitation the rights to use, copy, 
+    modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+    Software, and to permit persons to whom the Software is furnished to do so, 
+    subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies 
+    or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+    PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+For the avoidance of doubt, this license does not allow commercial use.  A commercial 
+    license is available, and is licensed through the Office of Technology Management 
+    at Washington University.  For information about a commercial license, please contact:
+Scott Crick Ph.D. | Licensing Associate
+Washington University in St. Louis | Office of Technology Management
+Mailing Address: Campus Box 8013, 660 South Euclid, St. Louis, MO 63110 
+Physical Address: 4240 Duncan Ave., Suite 110, St. Louis, MO 63110
+P 314.362.7808 | F 314.362.5872 | E-mail: scrick@wustl.edu
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Suggests: knitr, rmarkdown
