@@ -13,7 +13,7 @@ Author: c(person("Alexander Paul", email="apaul7@slu.edu"), person("Tae-
 Maintainer: Alex Paul <apaul7@slu.edu>
 Description: Tool used to interpret the long gene expression values. This can
     be done through the shiny app or through a R function.
-License: Copyright (c) <2016> <Washington University and St. Louis University>
+License: Copyright (c) <2016> <Washington University and Saint Louis University>
 <Matthew J. McCoy, Alexander J. Paul, Haijun Gong, Tae-Hyuk (Ted) Ahn and Andrew S. Yoo>
 Permission is hereby granted, free of charge, to any academic, government, 
     and non-profit/not-for-profit institutions obtaining a copy of this software 
@@ -22,14 +22,17 @@ Permission is hereby granted, free of charge, to any academic, government,
     modify, merge, publish, distribute, sublicense, and/or sell copies of the 
     Software, and to permit persons to whom the Software is furnished to do so, 
     subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies 
-    or substantial portions of the Software.
+    
+The above copyright notice and this permission notice shall be included in all 
+    copies or substantial portions of the Software.
+    
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
     INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
     PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
     OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    
 For the avoidance of doubt, this license does not allow commercial use.  A commercial 
     license is available, and is licensed through the Office of Technology Management 
     at Washington University.  For information about a commercial license, please contact:
