@@ -48,7 +48,7 @@ LONGO <- function() {
                         ),
                         shiny::uiOutput("identifier"),
                         shiny::fileInput(inputId="datafile",
-                            label="Choose CSV file:",
+                            label="Choose data file:",
                             accept=c("text/csv",
                                 "text/comma-separated-values,text/plain",
                                 ".csv", ".tsv")
@@ -164,6 +164,31 @@ LONGO <- function() {
                         label="Download Long Gene Quotient Values"
                     )
                 )
+            ),
+            shiny::tabPanel(title="GO Analysis",
+                shiny::sidebarLayout(
+                    shiny::sidebarPanel(
+                        shiny::checkboxInput(inputId="replicates",
+                            label="Replicates",
+                            value=FALSE
+                        ),
+                        shiny::radioButtons(inputId="GOscoring",label="GO scoring method",
+                                            c("fisher","ks","t","globaltest","sum")),
+                        shiny::radioButtons(inputId="GOgraphing",label="GO graphing method",
+                                            c("classic","elim","weight01","lea")),
+                        shiny::uiOutput("replicate"),
+                        shiny::uiOutput("outputReplicates")
+                    ),
+                    shiny::mainPanel(
+                        shiny::uiOutput("testing55"),
+                        shiny::actionButton("GOanalysis","Start GO analysis"),
+                        shiny::downloadButton(outputId="downloadplot",label="download GO plot"),
+                        shiny::plotOutput(outputId="plot5", height=1000, width=1000)
+                    #shiny::downloadButton(outputId="downloadLongGeneQValues",
+                    #    label="Download Long Gene Quotient Values"
+                    #)
+                    )
+                )
             )
         )
     })
@@ -189,6 +214,76 @@ LONGO <- function() {
             )
         })
 
+        output$replicate <- shiny::renderUI(
+            if(input$replicates==FALSE){
+                return(NULL)
+            }
+            else{
+                textInput("numReplicates", "Number of treatments", value="1", width=NULL, placeholder=NULL)
+                #### plot things for replicates...
+            }
+        )
+
+        output$outputReplicates <- shiny::renderUI(
+            if(is.null(input$numReplicates)){
+                return(NULL)
+            }
+            else{
+#                textOutput("replicateoutput",)
+            ##    print(input$numReplicates)
+                #x <- input$numReplicates
+                #renderText(1:x)
+                repnum <- as.integer(input$numReplicates)
+                num <- as.integer(ncol(alldata.df$filedata))-1
+                temp <- 1:repnum
+                names(temp) <- LETTERS[1:repnum]
+                selectOptiona <- list(temp)
+                lapply(1:num,function(i){
+                    radioButtons(inputId = paste("text",i), label=colnames(alldata.df$filedata)[i+1],
+                                    temp
+                    )
+                })
+            }
+        )
+        output$testing55 <- shiny::renderUI(
+            if(input$numReplicates=="" | is.null(input$numReplicates)){
+                return(NULL)
+            }
+            else{
+                temp2 <- list()
+                for(i in 1:(as.numeric(ncol(alldata.df$filedata))-1)) {
+                    temp2[[i]] <- input[[paste("text",i)]] #access the value of ith text input widget
+                }
+                LONGOTEMP2<-temp2
+                alldata.df$replicateOrder <- temp2
+                #print(paste("reporderLONGO:", temp2," length:", length(temp2)))
+                return(temp2)
+            }
+        )
+
+
+        output$downloadplot <- downloadHandler(
+            #need library(ggplot2)......
+            filename = paste(input$datafile,".png", sep=""),
+            content = function(file){
+                ggsave(file, plot=alldata.df$GObm.df, device="png")
+            }
+        )
+
+        shiny::observeEvent(input$GOanalysis, {
+            # call go analysis
+            #LONGOFINAL.DF <<- alldata.df$rawdata
+            #LONGOspeciesensemble <<- alldata.df$species_ensembl
+            #LONGOREPORDER <<- alldata.df$replicateOrder
+            results2 <- GOanalysis(alldata.df$rawdata,
+                                    alldata.df$GObm.df,
+                                    alldata.df$species_ensembl,
+                                    alldata.df$replicateOrder)
+            alldata.df$GOdata <- results2[1]
+            alldata.df$GOgraph <- results2[2]
+            alldata.df$GObm.df <- results2[3]
+        })
+
         options(shiny.maxRequestSize=30 * 1024 ^ 2)
 
         alldata.df <- shiny::reactiveValues(
@@ -201,10 +296,15 @@ LONGO <- function() {
             status="Please select options and start. Analysis can take up
                 to a minute to complete. Please be patient",
             labels=NULL,
-            species_ensembl=NULL
+            species_ensembl=NULL,
+            replicateOrder=NULL,
+            GOdata=NULL,
+            GOgraph=NULL,
+            GObm.df=NULL
         )
 
-        output$columns <- shiny::renderText(c(1, 2, 3))
+
+##??        output$columns <- shiny::renderText(c(1, 2, 3))
 
         shiny::observeEvent(list(input$datafile, input$sep, input$header,
             input$species, input$identifier), {
@@ -409,6 +509,10 @@ LONGO <- function() {
                 srt=45, adj=c(1.1, 1.1), xpd=TRUE, cex=.9
             )
             mtext(text=input$datafile, outer=TRUE, cex=1.5)
+        })
+
+        output$plot5 <- shiny::renderPlot({
+            alldata.df$GOgraph
         })
 
         output$data_final_table <-

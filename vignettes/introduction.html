@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo" />
 
-<meta name="date" content="2016-11-29" />
+<meta name="date" content="2017-05-03" />
 
 <title>LONGO: Long gene expression as a metric for neuronal identity</title>
 
@@ -32,7 +32,7 @@
 
 <h1 class="title toc-ignore">LONGO: Long gene expression as a metric for neuronal identity</h1>
 <h4 class="author"><em>Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo</em></h4>
-<h4 class="date"><em>2016-11-29</em></h4>
+<h4 class="date"><em>2017-05-03</em></h4>
 
 
 
@@ -76,31 +76,23 @@ biocLite(&quot;preprocessCore&quot;)</code></pre></li>
 <h2>Usage:</h2>
 <div id="pre-processing" class="section level3">
 <h3>Pre-processing:</h3>
-<p>In order to use LONGO the data needs to be in a specific format. This format has the gene identifier in the first column and all of the other columns are expression values. The first row can be a header. The script file in the LONGO directory has multiple examples of pre-processing.</p>
+<p>In order to use LONGO the data needs to be in a specific format. This format has the gene identifier in the first column and all of the other columns are expression values. The first row can be a header which will help in viewing the plots. An example data set can be downloaded [here][<a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix" class="uri">ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix</a>].This data is in the correct format.</p>
 </div>
 <div id="longo-1" class="section level3">
 <h3>LONGO():</h3>
-<p>The LONGO function allows the user to input initial variables complete an initial analysis with the default inputs. Then the user can alter some of the variables used in the analysis. A general workflow is given below. Start the shiny interface using:</p>
-<pre><code>    LONGO()</code></pre>
+<p>The next step is to use the start the shiny interface of LONGO using: <code>LONGO()</code> This will start the interface giving the main menu as seen in figure 1. [figure 1][figures1_main.png]</p>
+<p>Once you have the session started you can upload your data file. For this example the dataset provided above is going to be used. The data fileis for humans so the default species gene ensembl can be used. If your data is from a different species select it from the drop down. As you change the species the available options for the gene identifier will also change. This is because the biomart database has different identifiers for different species. The example data uses the <code>affy_primeview</code> as a gene identifier. The default option fo the separator is tab separated, which is what the example data file uses. Once all the correct options are selected the view should look like figure 2. As the options related to the data file are changed the updated view of the data is shown in the main window. [figure 2][figures2_submit.png]</p>
+<p>This next step can take up to a minute depending on how large the dataset is. Once LONGO finishes there will be a notice on the top stating it completed and the time it finished. The Data Table tab shows the results of the gene names and gene lengths depending on the gene identifier used. There is an option to download this data. [figure 3][figures/03_data_table.png]</p>
+<p>The LONGO Output tab shows the LONGO plot. This plot shows the results of the window binning for each dataset. The initial results are using the default values. [figure 4][figures/04_LONGO_output.png]</p>
+<p>There are several parameters on the side panel of the LONGO Output tab. All of these options change the results.</p>
 <ul>
-<li>Load pre-processed data
-<ul>
-<li>Select options for data file</li>
-</ul></li>
-<li>Select species</li>
-<li>Select gene identifier
-<ul>
-<li>Make sure gene identifier is in the first column</li>
-</ul></li>
-<li>Confirm data is accurate, click submit</li>
-<li>Wait until the analysis completes</li>
-<li>Data Table output tab has the gene name, length for the data</li>
-<li>LONGO Output tab has the LONGO plot and few other statistical plots
-<ul>
-<li>Can adjust certain variables to see how they affect the plots</li>
-</ul></li>
-<li>Long Gene Quotient tab has the long gene quotient plot</li>
-<li>The raw data for all of these plots are available to be downloaded via download buttons</li>
+<li>Sliding Window Method This parameter is used to get the final bin result. The two options median or mean can be used. The median is the default option which takes the median expression of all the genes within the window.</li>
+<li>Handle Multi Probes to Single Gene This parameter is used to reduce the number of gene identifiers which are for the same gene. There are two options the mean or the highest.</li>
+<li>X-axis scale This parameter is used as the axis for the plots.</li>
+<li>Legend Position This parameter changes the position of the legend.</li>
+<li>Bin Size This parameter is used change the size of the bin. The default is 200. Dencreasing the bin size, increases the chances of a bin not having any genes. This will mess up the plot.</li>
+<li>Step Size This parameter is used to change the step size LONGO takes.</li>
+<li>Control Column This parameter is used if the data has a control column in your data. This option is used for calculating the LONG Gene Quotient.</li>
 </ul>
 </div>
 <div id="longocmd" class="section level3">
@@ -114,89 +106,86 @@ biocLite(&quot;preprocessCore&quot;)</code></pre></li>
         {filterData = TRUE}, {normalizeData = TRUE}, {controlColumn = 2})
             
     LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
-        LIBRARY_TYPE = &quot;affy_mouse430a_2&quot;)
+        LIBRARY_TYPE = &quot;external_gene_name&quot;)
     
     LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
-        LIBRARY_TYPE = &quot;affy_mouse430a_2&quot;)
-    
-    LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
-        LIBRARY_TYPE = &quot;affy_mouse430a_2&quot;, WINDOW_SIZE = 350, 
+        LIBRARY_TYPE = &quot;external_gene_name&quot;, WINDOW_SIZE = 350, 
         MULTI_PROBES = &quot;highest&quot;, FILTERED = FALSE)</code></pre>
 </div>
 </div>
-<div id="biomart-identifier-as-of-2016-11-29" class="section level2">
-<h2>Biomart identifier (as of 2016-11-29)</h2>
+<div id="biomart-identifier-as-of-2017-05-03" class="section level2">
+<h2>Biomart identifier (as of 2017-05-03)</h2>
 <p>Below is a list of all the Biomart data sets available.</p>
 <pre><code>##                           dataset
-## 1          oanatinus_gene_ensembl
-## 2         cporcellus_gene_ensembl
-## 3         gaculeatus_gene_ensembl
-## 4  itridecemlineatus_gene_ensembl
-## 5          lafricana_gene_ensembl
-## 6         choffmanni_gene_ensembl
-## 7          csavignyi_gene_ensembl
-## 8             fcatus_gene_ensembl
-## 9        rnorvegicus_gene_ensembl
-## 10         psinensis_gene_ensembl
-## 11          cjacchus_gene_ensembl
-## 12        ttruncatus_gene_ensembl
-## 13       scerevisiae_gene_ensembl
-## 14          celegans_gene_ensembl
-## 15          csabaeus_gene_ensembl
-## 16        oniloticus_gene_ensembl
-## 17        amexicanus_gene_ensembl
-## 18         trubripes_gene_ensembl
-## 19          pmarinus_gene_ensembl
-## 20        eeuropaeus_gene_ensembl
-## 21       falbicollis_gene_ensembl
-## 22         etelfairi_gene_ensembl
-## 23     cintestinalis_gene_ensembl
-## 24      ptroglodytes_gene_ensembl
-## 25       nleucogenys_gene_ensembl
-## 26           sscrofa_gene_ensembl
-## 27        ocuniculus_gene_ensembl
-## 28     dnovemcinctus_gene_ensembl
-## 29         pcapensis_gene_ensembl
-## 30          tguttata_gene_ensembl
-## 31        mlucifugus_gene_ensembl
-## 32          hsapiens_gene_ensembl
-## 33          pformosa_gene_ensembl
-## 34        tbelangeri_gene_ensembl
-## 35             mfuro_gene_ensembl
-## 36           ggallus_gene_ensembl
-## 37       xtropicalis_gene_ensembl
-## 38         ecaballus_gene_ensembl
-## 39           pabelii_gene_ensembl
-## 40            drerio_gene_ensembl
-## 41        xmaculatus_gene_ensembl
-## 42     tnigroviridis_gene_ensembl
-## 43        lchalumnae_gene_ensembl
-## 44      amelanoleuca_gene_ensembl
-## 45          mmulatta_gene_ensembl
-## 46         pvampyrus_gene_ensembl
-## 47           panubis_gene_ensembl
-## 48        mdomestica_gene_ensembl
-## 49     acarolinensis_gene_ensembl
-## 50            vpacos_gene_ensembl
-## 51         tsyrichta_gene_ensembl
-## 52        ogarnettii_gene_ensembl
-## 53     dmelanogaster_gene_ensembl
-## 54          mmurinus_gene_ensembl
-## 55         loculatus_gene_ensembl
-## 56          olatipes_gene_ensembl
-## 57         oprinceps_gene_ensembl
-## 58          ggorilla_gene_ensembl
-## 59            dordii_gene_ensembl
-## 60            oaries_gene_ensembl
-## 61         mmusculus_gene_ensembl
-## 62        mgallopavo_gene_ensembl
-## 63           gmorhua_gene_ensembl
-## 64          saraneus_gene_ensembl
-## 65    aplatyrhynchos_gene_ensembl
-## 66         sharrisii_gene_ensembl
-## 67          meugenii_gene_ensembl
-## 68           btaurus_gene_ensembl
-## 69       cfamiliaris_gene_ensembl</code></pre>
+## 1            sscrofa_gene_ensembl
+## 2          etelfairi_gene_ensembl
+## 3          trubripes_gene_ensembl
+## 4            ggallus_gene_ensembl
+## 5        rnorvegicus_gene_ensembl
+## 6         cporcellus_gene_ensembl
+## 7      dmelanogaster_gene_ensembl
+## 8           ggorilla_gene_ensembl
+## 9              mfuro_gene_ensembl
+## 10         pvampyrus_gene_ensembl
+## 11          mmurinus_gene_ensembl
+## 12       falbicollis_gene_ensembl
+## 13           btaurus_gene_ensembl
+## 14          cjacchus_gene_ensembl
+## 15    aplatyrhynchos_gene_ensembl
+## 16           panubis_gene_ensembl
+## 17       xtropicalis_gene_ensembl
+## 18          tguttata_gene_ensembl
+## 19            oaries_gene_ensembl
+## 20      amelanoleuca_gene_ensembl
+## 21         mmusculus_gene_ensembl
+## 22        ocuniculus_gene_ensembl
+## 23          pmarinus_gene_ensembl
+## 24         psinensis_gene_ensembl
+## 25     acarolinensis_gene_ensembl
+## 26          olatipes_gene_ensembl
+## 27        lchalumnae_gene_ensembl
+## 28     cintestinalis_gene_ensembl
+## 29            dordii_gene_ensembl
+## 30        ttruncatus_gene_ensembl
+## 31          saraneus_gene_ensembl
+## 32        xmaculatus_gene_ensembl
+## 33        eeuropaeus_gene_ensembl
+## 34        mdomestica_gene_ensembl
+## 35         tsyrichta_gene_ensembl
+## 36          meugenii_gene_ensembl
+## 37      ptroglodytes_gene_ensembl
+## 38        oniloticus_gene_ensembl
+## 39        mlucifugus_gene_ensembl
+## 40        choffmanni_gene_ensembl
+## 41         oprinceps_gene_ensembl
+## 42           gmorhua_gene_ensembl
+## 43            vpacos_gene_ensembl
+## 44            fcatus_gene_ensembl
+## 45          csabaeus_gene_ensembl
+## 46       nleucogenys_gene_ensembl
+## 47            drerio_gene_ensembl
+## 48        ogarnettii_gene_ensembl
+## 49          hsapiens_gene_ensembl
+## 50     dnovemcinctus_gene_ensembl
+## 51        amexicanus_gene_ensembl
+## 52           pabelii_gene_ensembl
+## 53         lafricana_gene_ensembl
+## 54 itridecemlineatus_gene_ensembl
+## 55         ecaballus_gene_ensembl
+## 56         oanatinus_gene_ensembl
+## 57         pcapensis_gene_ensembl
+## 58     tnigroviridis_gene_ensembl
+## 59          pformosa_gene_ensembl
+## 60        gaculeatus_gene_ensembl
+## 61         csavignyi_gene_ensembl
+## 62         loculatus_gene_ensembl
+## 63        mgallopavo_gene_ensembl
+## 64       scerevisiae_gene_ensembl
+## 65         sharrisii_gene_ensembl
+## 66          mmulatta_gene_ensembl
+## 67          celegans_gene_ensembl
+## 68       cfamiliaris_gene_ensembl
+## 69        tbelangeri_gene_ensembl</code></pre>
 <p>Once the data set is selected from above it is possible to get a list of possible gene identifies using the following command, where ‘speciesDataset’ is equal to a data set from the above list.</p>
 <pre><code>    ensembl &lt;- biomaRt::useMart(&quot;ENSEMBL_MART_ENSEMBL&quot;, 
         host = &quot;www.ensembl.org&quot;, dataset=&lt;speciesDataset&gt;)</code></pre>
@@ -210,7 +199,7 @@ biocLite(&quot;preprocessCore&quot;)</code></pre></li>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
