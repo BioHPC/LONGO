@@ -40,7 +40,7 @@ making up the windows to the window values in the control.
     *   install by using the following R commands:  
 
             > source("https://bioconductor.org/biocLite.R")  
-            > biocLite("edgeR"")  
+            > biocLite("edgeR")  
 
 *   preprocessCore package
     *   install by using the following R commands:  
