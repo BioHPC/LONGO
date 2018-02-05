@@ -15,9 +15,8 @@ LONGOquotient(data.df, JSdata.df, controlColumn)
 control}
 }
 \value{
-Returns nothing
+Returns final data
 }
 \description{
 This is an internal functuon. This function calculcates the LONGO quotient.
 }
-

@@ -47,6 +47,18 @@ making up the windows to the window values in the control.
 
             > source("https://bioconductor.org/biocLite.R")  
             > biocLite("preprocessCore")  
+            
+*   topGO package
+    *   install by using the following R commands:  
+
+            > source("https://bioconductor.org/biocLite.R")  
+            > biocLite("topGO")  
+            
+*   Rgraphviz package
+    *   install by using the following R commands:  
+
+            > source("https://bioconductor.org/biocLite.R")  
+            > biocLite("Rgraphviz")
 
 *   shiny package:
     *   install by using the following R command:  
@@ -80,7 +92,7 @@ the instructions below:
 
 Another option is to use the follow R line: 
 
- 	> install.packages(“~/LONGO_0.2.2.tar.gz”, repos = NULL, type = “source”) 
+ 	> install.packages(“~/LONGO_0.2.8.tar.gz”, repos = NULL, type = “source”) 
 
 # Pre-processing:
 In order to use LONGO the data needs to be in a specific format. This format
@@ -105,6 +117,8 @@ directory has multiple examples of pre-processing.
 - Long Gene Quotient tab has the long gene quotient plot
 - The raw data for all of these plots are available to be downloaded 
 via download buttons
+- The GO Analysis tab provides options allowing graphing of the GO enrichment
+analysis 
 
 #Usage with LONGOcmd():
 The LONGOcmd function will automatically write the output data files to your

@@ -5,10 +5,10 @@
 \title{LONGO function}
 \usage{
 LONGOcmd(fileLocation, separator = ",", header = TRUE, commentChar = "!",
-    species = "hsapiens_gene_ensembl", libraryType = "affy_primeview",
-    multiProbes = "mean", windowSize = 200, stepSize = 40,
-    windowStyle = "mean", filterData = TRUE, normalizeData = TRUE,
-    controlColumn = 2)
+  species = "hsapiens_gene_ensembl", libraryType = "affy_primeview",
+  multiProbes = "mean", windowSize = 200, stepSize = 40,
+  windowStyle = "mean", filterData = TRUE, normalizeData = TRUE,
+  controlColumn = 2)
 }
 \arguments{
 \item{fileLocation}{Address to the file to be analyzed}
@@ -59,7 +59,6 @@ libraryType = "affy_mouse430a_2")
 \donttest{
 LONGOcmd("~/data.csv")
 LONGOcmd("~/data.csv", windowSize=100, stepSize=20)
-LONGOcmd("~/data.csv", multiProbes="mean")
+LONGOcmd("~/data.csv", multiProbes="highest")
 }
 }
-

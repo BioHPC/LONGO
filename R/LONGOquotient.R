@@ -6,7 +6,7 @@
 #' @param JSdata.df The JS distance data from analysis
 #' @param controlColumn The column in the data which should be used as
 #' control
-#' @return Returns nothing
+#' @return Returns final data
 LONGOquotient <- function(
     data.df,
     JSdata.df,

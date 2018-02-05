@@ -1,10 +1,13 @@
 #' Example dataset to show LONGO
 #'
 #' Yu et al., Nature Communications 2014
-#' Data obtained from: http://pgx.fudan.edu.cn/ratbodymap/ratbodymap_data/fordownload/Ratbodymap_Gene_FPKM_v2.txt.gz
-
+#' Raw data  was downloaded from: http://pgx.fudan.edu.cn/ratbodymap/
+#' ratbodymap_data/fordownload/Ratbodymap_Gene_FPKM_v2.txt.gz
+#' The replicates for each sample were averaged to get a single sample for
+#'  easy testing.
+#' @name exampleData
 #' @format A data frame with 40,2064 rows and 12 columns:
-#' \describe{
+#' \itemize{
 #'   \item{Gene_symbol}{1}
 #'   \item{Adr}{2}
 #'   \item{bRN}{3}
@@ -18,5 +21,7 @@
 #'   \item{Tst}{11}
 #'   \item{Utr}{12}
 #' }
-#' @return Returns nothing
-"exampleData"
+#'
+#' @source \url{http://pgx.fudan.edu.cn/ratbodymap/ratbodymap_data/
+#' fordownload/Ratbodymap_Gene_FPKM_v2.txt.gz}
+NULL

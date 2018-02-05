@@ -29,8 +29,5 @@ dict <- function(data.df, biomaRt.df) {
         (data.df[, (ncol(data.df) - 1)] == "")), ]
     data.df <-data.df[!(is.na(data.df[, (ncol(data.df))]) |
         (data.df[, (ncol(data.df))] == "")), ]
-    write.table(data.df, "LONGO_out_raw_table.tsv", sep = "\t",
-        quote = FALSE, col.names = TRUE, row.names = FALSE
-    )
-    return(data.df)
+return(data.df)
 }
