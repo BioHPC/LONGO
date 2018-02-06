@@ -1,4 +1,4 @@
-#' Example dataset to show LONGO
+#' Example dataset
 #'
 #' Yu et al., Nature Communications 2014
 #' Raw data  was downloaded from: http://pgx.fudan.edu.cn/ratbodymap/
@@ -22,6 +22,5 @@
 #'   \item{Utr}{12}
 #' }
 #'
-#' @source \url{http://pgx.fudan.edu.cn/ratbodymap/ratbodymap_data/
-#' fordownload/Ratbodymap_Gene_FPKM_v2.txt.gz}
+#' @source \url{http://pgx.fudan.edu.cn/ratbodymap/ratbodymap_data/fordownload/Ratbodymap_Gene_FPKM_v2.txt.gz}
 NULL

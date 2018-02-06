@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo" />
+
+<meta name="date" content="2018-02-06" />
+
+<title>LONGO Vignette</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">LONGO Vignette</h1>
+<h4 class="author"><em>Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo</em></h4>
+<h4 class="date"><em>2018-02-06</em></h4>
+
+
+
+<div id="longo" class="section level2">
+<h2>LONGO</h2>
+<p>LONGO is designed to have two different uses. One through a shiny interface and another through R. Both of results of the program are the same. The shiny interface will allow the user to alter certain variables in the analysis to see how they will affect the result. This can be useful when interpreting new data.</p>
+<p>LONGO is designed to take in a data file with a gene identifier to get the gene name and length. Occasionally there will be multiple probes going to a single gene. LONGO can handle this in two different ways. The default way is to get the mean expression values. The other option is to only keep the probe that has the highest overall expression values. If a read has no identified gene name or length in BioMart, the read is removed.</p>
+<p>After getting the gene names and lengths the data is sorted by length. A rolling window is used to create bins. The user can change the size of the window as well as the step size of the window. These rolling window values are then plotted. The P value plot shows the p value comparisons of the values making up the windows to the window values in the control.</p>
+</div>
+<div id="prerequisites" class="section level2">
+<h2>Prerequisites:</h2>
+<div id="bioconductor-packages" class="section level3">
+<h3>Bioconductor packages:</h3>
+<ul>
+<li><p>biomaRt</p>
+<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)  
+biocLite(&quot;biomaRt&quot;)</code></pre></li>
+<li><p>edgeR</p>
+<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)  
+biocLite(&quot;edgeR&quot;)  </code></pre></li>
+<li><p>preprocessCore</p>
+<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)  
+biocLite(&quot;preprocessCore&quot;)</code></pre></li>
+<li><p>topGO</p>
+<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)  
+biocLite(&quot;topGO&quot;)</code></pre></li>
+<li><p>Rgraphviz</p>
+<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)  
+biocLite(&quot;Rgraphviz&quot;)</code></pre></li>
+</ul>
+</div>
+<div id="cran-packages" class="section level3">
+<h3>CRAN packages:</h3>
+<ul>
+<li><p>shiny</p>
+<pre><code>install.packages(&quot;shiny&quot;) </code></pre></li>
+<li><p>DT</p>
+<pre><code>install.packages(&quot;DT&quot;) </code></pre></li>
+<li><p>data.table</p>
+<pre><code>install.packages(&quot;data.table&quot;) </code></pre></li>
+<li><p>hash</p>
+<pre><code>install.packages(&quot;hash&quot;) </code></pre></li>
+</ul>
+</div>
+</div>
+<div id="usage" class="section level2">
+<h2>Usage:</h2>
+<div id="pre-processing" class="section level3">
+<h3>Pre-processing:</h3>
+<p>In order to use LONGO the data needs to be in a specific format. This format has the gene identifier in the first column and all of the other columns are expression values. The first row can be a header which will help in viewing the plots. An example data set can be downloaded <a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix">here</a>. This data is in the correct format.</p>
+</div>
+<div id="longo-1" class="section level3">
+<h3>LONGO():</h3>
+<p>The next step is to use the start the shiny interface of LONGO using: <code>LONGO()</code> This will start the interface giving the main menu.</p>
+<p>Once you have the session started you can upload your data file. For this example the dataset provided above is going to be used. The data fileis for humans so the default species gene ensembl can be used. If your data is from a different species select it from the drop down. As you change the species the available options for the gene identifier will also change. This is because the biomart database has different identifiers for different species. The example data uses the <code>affy_primeview</code> as a gene identifier. The default option fo the separator is tab separated, which is what the example data file uses. As the options related to the data file are changed the updated view of the data is shown in the main window.</p>
+<p>This next step can take up to a minute depending on how large the dataset is. Once LONGO finishes there will be a notice on the top stating it completed and the time it finished. The Data Table tab shows the results of the gene names and gene lengths depending on the gene identifier used. There is an option to download this data.</p>
+<p>The LONGO Output tab shows the LONGO plot. This plot shows the results of the window binning for each dataset. The initial results are using the default values.</p>
+<p>There are several parameters on the side panel of the LONGO Output tab. All of these options change the results.</p>
+<ul>
+<li>Sliding Window Method This parameter is used to get the final bin result. The two options median or mean can be used. The median is the default option which takes the median expression of all the genes within the window.</li>
+<li>Handle Multi Probes to Single Gene This parameter is used to reduce the number of gene identifiers which are for the same gene. There are two options the mean or the highest.</li>
+<li>X-axis scale This parameter is used as the axis for the plots.</li>
+<li>Legend Position This parameter changes the position of the legend.</li>
+<li>Bin Size This parameter is used change the size of the bin. The default is 200. Dencreasing the bin size, increases the chances of a bin not having any genes. This will mess up the plot.</li>
+<li>Step Size This parameter is used to change the step size LONGO takes.</li>
+<li>Control Column This parameter is used if the data has a control column in your data. This option is used for calculating the LONG Gene Quotient.</li>
+</ul>
+<p>The Long Gene Quotient tab shows the bar graph with the results of the Long Gene Quotient analysis. The red bar is used to mark the 0.25 point. Generally any LQ value above 0.25 means the sample is neuronal.</p>
+<p>The GO Analysis tab allows creation of a GO enrichment graph using the topGO package. There are multiple input variables that can be altered to get different graphs. - Domain for GO Analysis This parameter is used to determine which Gene Ontology Domain should be used: Cellular Component, Molecular Functions, Biological Processes. - GO Scoring Method - GO Graphing Method - Number of Significant Node to Graph - P-value for significance - Scale for Graph Text - Replicates - Number of Treatments This is used to determine how many options will be displayed for the samples</p>
+</div>
+<div id="longocmd" class="section level3">
+<h3>LONGOcmd():</h3>
+<p>The LONGOcmd function will automatically write the output data files to your working directory. This can allow faster data analysis if you know the values to use. LONGOcmd can also be used with an R dataframe as the input file as long as it satisfies the format described in the pre-processing section above. The shiny interface is more beginner friendly while the LONGOcmd() requires more specific knowledge at the start. The LONGOcmd() function uses the same techniques but requires only the initial input. If you know the BioMart species database and gene identifier, you can use this for faster analysis. The first example gives an overview of the possible input variables and their defaults. The other examples use a data file that is included in the LONGO package.</p>
+<pre><code>    LONGOcmd(fileLocation = path_to_file, {separator = &quot;,&quot;},
+        {header = TRUE}, {commentChar = &quot;!&quot;},
+        {species = &quot;hsapiens_gene_ensembl&quot;}, 
+        {libraryType = &quot;affy_primeview&quot;}, {multiProbes = &quot;mean&quot;},
+        {windowSize = 200}, {stepSize = 40}, {windowStyle = &quot;mean&quot;},
+        {filterData = TRUE}, {normalizeData = TRUE}, {controlColumn = 2})
+            
+    LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
+        LIBRARY_TYPE = &quot;external_gene_name&quot;)
+    
+    LONGOcmd(exampleData, SPECIES = &quot;mmusculus_gene_ensembl&quot;,
+        LIBRARY_TYPE = &quot;external_gene_name&quot;, WINDOW_SIZE = 350, 
+        MULTI_PROBES = &quot;highest&quot;, FILTERED = FALSE)</code></pre>
+</div>
+</div>
+<div id="biomart-identifier-as-of-2018-02-06" class="section level2">
+<h2>Biomart identifier (as of 2018-02-06)</h2>
+<p>Below is a list of all the Biomart data sets available.</p>
+<pre><code>##                           dataset
+## 1       ptroglodytes_gene_ensembl
+## 2             dordii_gene_ensembl
+## 3         eeuropaeus_gene_ensembl
+## 4         gaculeatus_gene_ensembl
+## 5          lafricana_gene_ensembl
+## 6        scerevisiae_gene_ensembl
+## 7         xmaculatus_gene_ensembl
+## 8             fcatus_gene_ensembl
+## 9      cintestinalis_gene_ensembl
+## 10         psinensis_gene_ensembl
+## 11          tguttata_gene_ensembl
+## 12          pformosa_gene_ensembl
+## 13         ecaballus_gene_ensembl
+## 14      mleucophaeus_gene_ensembl
+## 15     dnovemcinctus_gene_ensembl
+## 16           caperea_gene_ensembl
+## 17         mspreteij_gene_ensembl
+## 18         loculatus_gene_ensembl
+## 19           ngalili_gene_ensembl
+## 20        cpalliatus_gene_ensembl
+## 21        tbelangeri_gene_ensembl
+## 22          mmurinus_gene_ensembl
+## 23           sscrofa_gene_ensembl
+## 24        cporcellus_gene_ensembl
+## 25          pbairdii_gene_ensembl
+## 26          mmulatta_gene_ensembl
+## 27        oniloticus_gene_ensembl
+## 28     tnigroviridis_gene_ensembl
+## 29         mmusculus_gene_ensembl
+## 30       xtropicalis_gene_ensembl
+## 31       fdamarensis_gene_ensembl
+## 32        cchok1gshd_gene_ensembl
+## 33           ccrigri_gene_ensembl
+## 34    aplatyrhynchos_gene_ensembl
+## 35            oaries_gene_ensembl
+## 36           btaurus_gene_ensembl
+## 37      amelanoleuca_gene_ensembl
+## 38        ttruncatus_gene_ensembl
+## 39           mpahari_gene_ensembl
+## 40        mdomestica_gene_ensembl
+## 41        pcoquereli_gene_ensembl
+## 42         oanatinus_gene_ensembl
+## 43       cfamiliaris_gene_ensembl
+## 44      mochrogaster_gene_ensembl
+## 45           panubis_gene_ensembl
+## 46           mcaroli_gene_ensembl
+## 47         pvampyrus_gene_ensembl
+## 48         etelfairi_gene_ensembl
+## 49             catys_gene_ensembl
+## 50           ggallus_gene_ensembl
+## 51        mgallopavo_gene_ensembl
+## 52          celegans_gene_ensembl
+## 53          mauratus_gene_ensembl
+## 54           pabelii_gene_ensembl
+## 55            odegus_gene_ensembl
+## 56          csabaeus_gene_ensembl
+## 57         csyrichta_gene_ensembl
+## 58     acarolinensis_gene_ensembl
+## 59 itridecemlineatus_gene_ensembl
+## 60         sharrisii_gene_ensembl
+## 61     mfascicularis_gene_ensembl
+## 62          olatipes_gene_ensembl
+## 63         csavignyi_gene_ensembl
+## 64          cjacchus_gene_ensembl
+## 65            vpacos_gene_ensembl
+## 66             mfuro_gene_ensembl
+## 67         ppaniscus_gene_ensembl
+## 68       nleucogenys_gene_ensembl
+## 69         trubripes_gene_ensembl
+## 70           gmorhua_gene_ensembl
+## 71       mnemestrina_gene_ensembl
+## 72        rroxellana_gene_ensembl
+## 73       falbicollis_gene_ensembl
+## 74        amexicanus_gene_ensembl
+## 75          ggorilla_gene_ensembl
+## 76          jjaculus_gene_ensembl
+## 77             hmale_gene_ensembl
+## 78         oprinceps_gene_ensembl
+## 79          saraneus_gene_ensembl
+## 80        ocuniculus_gene_ensembl
+## 81        lchalumnae_gene_ensembl
+## 82            drerio_gene_ensembl</code></pre>
+<p>Once the data set is selected from above it is possible to get a list of possible gene identifies using the following command, where ‘speciesDataset’ is equal to a data set from the above list.</p>
+<pre><code>    ensembl &lt;- biomaRt::useMart(&quot;ENSEMBL_MART_ENSEMBL&quot;, 
+        host = &quot;www.ensembl.org&quot;, dataset=&lt;speciesDataset&gt;)</code></pre>
+<p>For the LONGO analysis, the “external_gene_name” from the BioMart data set was used as the source of the gene name. This was used to determine if there were duplicate reads. The method for handling these repeats is based on the input variable of “MULTI_PROBES”</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

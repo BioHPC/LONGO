@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.R
 \name{exampleData}
 \alias{exampleData}
-\title{Example dataset to show LONGO}
+\title{Example dataset}
 \format{A data frame with 40,2064 rows and 12 columns:
 \itemize{
   \item{Gene_symbol}{1}
@@ -19,8 +19,7 @@
   \item{Utr}{12}
 }}
 \source{
-\url{http://pgx.fudan.edu.cn/ratbodymap/ratbodymap_data/
-fordownload/Ratbodymap_Gene_FPKM_v2.txt.gz}
+\url{http://pgx.fudan.edu.cn/ratbodymap/ratbodymap_data/fordownload/Ratbodymap_Gene_FPKM_v2.txt.gz}
 }
 \description{
 Yu et al., Nature Communications 2014

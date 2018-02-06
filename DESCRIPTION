@@ -1,16 +1,17 @@
 Package: LONGO
 Type: Package
 Title: Long gene expression as a metric for neuronal identity
-Version: 0.3.0
+Version: 0.3.1
 biocViews: Transcriptomics, ResearchField, Software, BiologicalQuestion,
     DifferentialExpression, GeneExpression
 Depends: R (>= 3.4)
 Imports: biomaRt, shiny, DT, hash, topGO, data.table, edgeR, preprocessCore, stats,
     grDevices, graphics, utils, methods
-Author: c(person("Alexander Paul", email="apaul7@slu.edu"), person("Tae-
-    Hyuk (Ted) Ahn", email="ahnt@slu.edu"), person("Matthew McCoy", email =
-    "mccoy@wustl.edu"), person("Andrew Yoo", email="yooa@wustl.edu"))
-Maintainer: Alex Paul <alex.paul@slu.edu>
+Authors@R: c(person("Alexander Paul", email="alex.paul@slu.edu", role=c("aut",
+    "cre")), person("Tae-Hyuk (Ted) Ahn", email="ted.ahn@slu.edu", role="aut"), 
+    person("Matthew McCoy", email="mccoy@wustl.edu", role="aut"), 
+    person("Andrew Yoo", email="yooa@wustl.edu", role="aut"))
+Maintainer: Alexander Paul <alex.paul@slu.edu>
 Description: Tool used to interpret the long gene expression values. This can
     be done through the shiny app or through a R function.
 License: file LICENSE
