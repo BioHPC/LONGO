@@ -1,0 +1,8 @@
+urls:
+  reference: https://biohpc.github.io/LONGO//reference
+  article: https://biohpc.github.io/LONGO//articles
+articles:
+  install: LONGO_install/install.html
+  usage: LONGO_usage/usage.html
+  vignette: vignette.html
+

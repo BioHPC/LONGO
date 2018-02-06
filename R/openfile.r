@@ -15,6 +15,7 @@ openfile <- function(fileLocation, separator, header, commentChar) {
             file = fileLocation,
             header = header,
             sep = separator,
+            blank.lines.skip = TRUE,
             comment.char = commentChar,
             na.strings = c("NA", " ", "")
         )

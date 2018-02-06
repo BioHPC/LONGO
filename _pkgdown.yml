@@ -1,0 +1,23 @@
+url: https://biohpc.github.io/LONGO/
+
+template:
+  params:
+    bootswatch: cerulean
+
+reference:
+  - title: User Functions
+    desc:  Tools to run the program
+    contents:
+    - LONGO
+    - LONGOcmd
+  - title: Internal Functions
+    contents:
+    - analyze
+    - callbiomaRt
+    - dict
+    - GOanalysis
+    - LONGOquotient
+    - openfile
+    - plotLONGO
+
+

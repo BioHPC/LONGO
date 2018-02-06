@@ -1,0 +1,58 @@
+---
+title: "Installation"
+author: "Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, 
+Andrew Yoo"
+date: "`r Sys.Date()`"
+output:
+    rmarkdown::html_vignette
+    #word_document
+vignette: >
+    %\VignetteIndexEntry{Vignette Title}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+
+## Prerequisite Bioconductor packages:  
+- biomaRt  
+```{} 
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("biomaRt")
+```
+- edgeR  
+```{}
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("edgeR")  
+```
+- preprocessCore  
+```{}
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("preprocessCore")
+```  
+- topGO  
+```{}
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("topGO")
+```  
+- Rgraphviz  
+```{}
+    source("https://bioconductor.org/biocLite.R")  
+    biocLite("Rgraphviz")
+```  
+
+##  Prerequisite CRAN packages:  
+- shiny  
+```{}
+    install.packages("shiny") 
+```  
+- DT  
+```{}
+    install.packages("DT") 
+```
+- data.table  
+```{}
+    install.packages("data.table") 
+```
+- hash  
+```{}
+    install.packages("hash") 
+```

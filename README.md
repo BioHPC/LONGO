@@ -40,13 +40,25 @@ making up the windows to the window values in the control.
     *   install by using the following R commands:  
 
             > source("https://bioconductor.org/biocLite.R")  
-            > biocLite("edgeR"")  
+            > biocLite("edgeR")  
 
 *   preprocessCore package
     *   install by using the following R commands:  
 
             > source("https://bioconductor.org/biocLite.R")  
             > biocLite("preprocessCore")  
+            
+*   topGO package
+    *   install by using the following R commands:  
+
+            > source("https://bioconductor.org/biocLite.R")  
+            > biocLite("topGO")  
+            
+*   Rgraphviz package
+    *   install by using the following R commands:  
+
+            > source("https://bioconductor.org/biocLite.R")  
+            > biocLite("Rgraphviz")
 
 *   shiny package:
     *   install by using the following R command:  
@@ -75,12 +87,12 @@ the instructions below:
  
 *	Tools dropdown -> Install Packages… 
 *	Change the Install from dropdown to Package Archive File 
-*	Locate the LONGO tarball (LONGO_0.2.2.tar.gz) 
+*	Locate the LONGO tarball (LONGO_0.3.0.tar.gz) 
 *	Click install 
 
 Another option is to use the follow R line: 
 
- 	> install.packages(“~/LONGO_0.2.2.tar.gz”, repos = NULL, type = “source”) 
+ 	> install.packages(“~/LONGO_0.3.0.tar.gz”, repos = NULL, type = “source”) 
 
 # Pre-processing:
 In order to use LONGO the data needs to be in a specific format. This format
@@ -89,24 +101,38 @@ expression values. The first row can be a header. The script file in the LONGO-s
 directory has multiple examples of pre-processing.
 
 
-#Usage with LONGO():
+# Usage with LONGO():
 - Launch LONGO  
-    > LONGO() 
+    > LONGO()
+    
+![figure 1](../figures/01_main.png)
 - Load pre-processed data
     - Select options for data file
 - Select species
 - Select gene identifier
     - Make sure gene identifier is in the first column
 - Confirm data is accurate, click submit
+
+![figure 2](../figures/02_submit.png)
 - Wait until the analysis completes
 - Data Table output tab has the gene name, length for the data
+
+![figure 3](../figures/03_data_table.png)
 - LONGO Output tab has the LONGO plot and few other statistical plots
     - Can adjust certain variables to see how they affect the plots
+    
+![figure 4](../figures/04_LONGO_output.png)
 - Long Gene Quotient tab has the long gene quotient plot
+
+![figure 5](../figures/05_LONGO_lq.png) 
 - The raw data for all of these plots are available to be downloaded 
 via download buttons
+- The GO Analysis tab provides options allowing graphing of the GO enrichment
+analysis
 
-#Usage with LONGOcmd():
+![figure 6](../figures/06_LONGO_go.png)
+
+# Usage with LONGOcmd():
 The LONGOcmd function will automatically write the output data files to your
 working directory. This can allow faster data analysis if you know the values
 to use. LONGOcmd can also be used with an R dataframe as the input file as long

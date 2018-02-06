@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^docs$
+^_pkgdown\.yml$
+^\.git/.$
+^.*\.tar\.gz$
+^index\.rmd$

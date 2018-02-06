@@ -1,0 +1,33 @@
+---
+title: "LONGO: Long gene expression as a metric for neuronal identity"
+author: "Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn,
+Andrew Yoo"
+date: "`r Sys.Date()`"
+output:
+    rmarkdown::html_vignette
+    #word_document
+vignette: >
+    %\VignetteIndexEntry{Vignette Title}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+## LONGO
+
+LONGO is designed to have two different uses. One through a shiny interface
+and another through R. Both of results of the program are
+the same. The shiny interface will allow the user to alter certain variables
+in the analysis to see how they will affect the result. This can be
+useful when interpreting new data.
+
+LONGO is designed to take in a data file with a gene identifier to get
+the gene name and length. Occasionally there will be multiple probes going
+to a single gene. LONGO can handle this in two different ways. The default way
+is to get the mean expression values. The other option is to only keep the
+probe that has the highest overall expression values. If a read has no
+identified gene name or length in BioMart, the read is removed.
+
+After getting the gene names and lengths the data is sorted by length. A
+rolling window is used to create bins. The user can change the size of the
+window as well as the step size of the window. These rolling window values
+are then plotted. The P value plot shows the p value comparisons of the values
+making up the windows to the window values in the control.
