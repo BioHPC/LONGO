@@ -1,6 +1,7 @@
 
 
 # LONGO: Gene Length-Dependent Expression Analysis Tool in Neuronal Cells
+Documentation is also available on GitHub Pages: https://biohpc.github.io/LONGO/  
 
 LONGO is designed to have two different uses. One through a shiny interface 
 and another through R. Both of results of the program are 
