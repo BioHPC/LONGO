@@ -105,7 +105,7 @@ directory has multiple examples of pre-processing.
 - Launch LONGO  
     > LONGO()
     
-![figure 1](../figures/01_main.png)
+![figure 1](./vignettes/figures/01_main.png)
 - Load pre-processed data
     - Select options for data file
 - Select species
@@ -113,24 +113,24 @@ directory has multiple examples of pre-processing.
     - Make sure gene identifier is in the first column
 - Confirm data is accurate, click submit
 
-![figure 2](../figures/02_submit.png)
+![figure 2](./vignettes/figures/02_submit.png)
 - Wait until the analysis completes
 - Data Table output tab has the gene name, length for the data
 
-![figure 3](../figures/03_data_table.png)
+![figure 3](./vignettes/figures/03_data_table.png)
 - LONGO Output tab has the LONGO plot and few other statistical plots
     - Can adjust certain variables to see how they affect the plots
     
-![figure 4](../figures/04_LONGO_output.png)
+![figure 4](./vignettes/figures/04_LONGO_output.png)
 - Long Gene Quotient tab has the long gene quotient plot
 
-![figure 5](../figures/05_LONGO_lq.png) 
+![figure 5](./vignettes/figures/05_LONGO_lq.png) 
 - The raw data for all of these plots are available to be downloaded 
 via download buttons
 - The GO Analysis tab provides options allowing graphing of the GO enrichment
 analysis
 
-![figure 6](../figures/06_LONGO_go.png)
+![figure 6](./vignettes/figures/06_LONGO_go.png)
 
 # Usage with LONGOcmd():
 The LONGOcmd function will automatically write the output data files to your
