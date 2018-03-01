@@ -48,13 +48,15 @@ GOanalysis <- function(analyzeData,
         geneToGoTerm <- biomaRt.go.df
     }
 
-    analyzeData <- data.table::as.data.table(analyzeData)
+    # only do long genes
+    analyzeData <- data.table::as.data.table(analyzeData[analyzeData$length>100,])
+
     temp2 <- analyzeData[, lapply(.SD, mean, na.rm= TRUE),
                         by=c(colnames(analyzeData)[(ncol(analyzeData)-1)]),
                         .SDcols=c(2:(ncol(analyzeData)-2))]
     temp2 <-  as.data.frame(temp2)
     symbolnames <- as.data.frame(temp2$symbol)
-    analyzeData <- temp2[,c(2:ncol(temp2))]#c(3:ncol(temp2))
+    analyzeData <- temp2[,c(2:ncol(temp2))]
     rownames(analyzeData) <- symbolnames$`temp2$symbol`
 
 
@@ -85,7 +87,7 @@ GOanalysis <- function(analyzeData,
                     description="Testing if it'll work", ontology=GODomain,
                     allGenes = testing.p, geneSel = topDiffGenes,
                     nodeSize = 10,
-                    annot = annFUN.gene2GO, gene2GO = geneToGoTerm
+                    annot = topGO::annFUN.gene2GO, gene2GO = geneToGoTerm
                 )
 
     resultKS <- topGO::runTest(testGOdata, algorithm=GoGraphing,

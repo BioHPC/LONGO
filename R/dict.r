@@ -11,9 +11,9 @@
 #' @return returns a dictionary
 dict <- function(data.df, biomaRt.df) {
     symbol.dict <- hash::hash(keys = data.df[, 1], values = NA)
-    .set(symbol.dict, keys = biomaRt.df[, 1], values=biomaRt.df[, 2])
+    hash::.set(symbol.dict, keys = biomaRt.df[, 1], values=biomaRt.df[, 2])
     len.dict <- hash::hash(keys = data.df[, 1], values=NA)
-    .set(len.dict, keys = biomaRt.df[, 1], values=biomaRt.df[, 3])
+    hash::.set(len.dict, keys = biomaRt.df[, 1], values=biomaRt.df[, 3])
 
     symdict.fun <- function(key) {
         return(symbol.dict[[key]])

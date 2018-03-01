@@ -1,3 +1,9 @@
+## LONGO 0.3.2
+
+### Main changes
+    - Updated GO analysis to use just Longe Gene Expression (LGE)
+________________________________________________________________________________
+
 ## LONGO 0.3.1
 
 ### Main changes
