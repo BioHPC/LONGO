@@ -17,13 +17,13 @@ vignette: >
 In order to use LONGO the data needs to be in a specific format. This format
 has the gene identifier in the first column and all of the other columns are 
 expression values. The first row can be a header which will help in viewing the 
-plots. An example data set can be downloaded
-[here](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix).
-This data is in the correct format. 
+plots. An example human data set can be downloaded
+[GSE69480](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix).
+This data is in the correct format and will be used in the example below. 
  
 ## LONGO():
 The next step is to use the start the shiny interface of LONGO using: `LONGO()`
-This will start the interface giving the main menu as seen in figure 1. 
+This will start a new window showing the main menu as seen in figure 1. 
   
 ![figure 1](../figures/01_main.png) 
   
@@ -32,7 +32,7 @@ This will start the interface giving the main menu as seen in figure 1.
   
 Once you have the session started you can upload your data file. For this 
 example
-the dataset provided above is going to be used. The data fileis for humans so
+the dataset provided above is going to be used. The data file is for humans so
 the default species gene ensembl can be used. If your data is from a different
 species select it from the drop down. As you change the species the available
 options for the gene identifier will also change. This is because the biomart
@@ -142,10 +142,10 @@ package.
         {windowSize = 200}, {stepSize = 40}, {windowStyle = "mean"},
         {filterData = TRUE}, {normalizeData = TRUE}, {controlColumn = 2})
             
-    LONGOcmd(exampleData, SPECIES = "mmusculus_gene_ensembl",
+    LONGOcmd(exampleRatData, SPECIES = "mmusculus_gene_ensembl",
         LIBRARY_TYPE = "external_gene_name")
     
-    LONGOcmd(exampleData, SPECIES = "mmusculus_gene_ensembl",
+    LONGOcmd(exampleRatData, SPECIES = "mmusculus_gene_ensembl",
         LIBRARY_TYPE = "external_gene_name", WINDOW_SIZE = 350, 
         MULTI_PROBES = "highest", FILTERED = FALSE)
 ```
@@ -160,7 +160,7 @@ Below is a list of all the Biomart data sets available.
 
 Once the data set is selected from above it is possible to get a list of
 possible
-gene identifies using the following command, where 'speciesDataset' is equal to
+gene identifies using the following command, where 'speciesDataset' is
 a data set from the above list.
 ```{}
     ensembl <- biomaRt::useMart("ENSEMBL_MART_ENSEMBL", 

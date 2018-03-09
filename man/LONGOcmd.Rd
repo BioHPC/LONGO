@@ -54,7 +54,7 @@ analysis of data. Please use the shiny interface first to get an
 understanding of how this package analyzes data.
 }
 \examples{
-LONGOcmd(exampleData, species = "mmusculus_gene_ensembl",
+LONGOcmd(exampleRatData, species = "mmusculus_gene_ensembl",
 libraryType = "affy_mouse430a_2")
 \donttest{
 LONGOcmd("~/data.csv")

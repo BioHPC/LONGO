@@ -85,7 +85,7 @@ making up the windows to the window values in the control.
 In order to use LONGO the data needs to be in a specific format. This format
 has the gene identifier in the first column and all of the other columns are 
 expression values. The first row can be a header which will help in viewing the 
-plots. An example data set can be downloaded
+plots. An example dataset can be downloaded
 [here](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix).
 This data is in the correct format. 
  

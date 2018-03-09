@@ -30,6 +30,7 @@ GOanalysis <- function(analyzeData,
                         sigCutOff=0.01,
                         textScale=0.15) {
     #library(topGO, quietly=TRUE)
+    requireNamespace("topGO", quietly = TRUE)
     #query biomart for go terms
     if(is.null(biomaRt.go.df)){
         genes.unique <- unique(analyzeData$symbol)
@@ -42,9 +43,7 @@ GOanalysis <- function(analyzeData,
         geneToGoTerm <- split(biomaRt.go.df$go_id,
                             biomaRt.go.df$external_gene_name)
         biomaRt.go.df <- geneToGoTerm
-
-    }
-    else{
+    } else{
         geneToGoTerm <- biomaRt.go.df
     }
 

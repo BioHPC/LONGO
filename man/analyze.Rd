@@ -22,9 +22,10 @@ windows, default=40}
 \item{windowStyle}{Option to alter the method used to create windows,
 default=mean}
 
-\item{filterData}{Option to filter data, default=TRUE}
+\item{filterData}{Option to filter data using edgeR::cpm, default=TRUE}
 
-\item{normalizeData}{Option to normalize data, default=TRUE}
+\item{normalizeData}{Option to normalize data using
+preprocessCore::normalize.quantiles, default=TRUE}
 
 \item{controlColumn}{column of the data used as a control for the
 statistical analyses}

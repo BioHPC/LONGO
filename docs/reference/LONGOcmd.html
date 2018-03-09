@@ -181,6 +181,11 @@ statistical analysis</p></td>
     <p>Returns nothing</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>LONGOcmd</span>(<span class='no'>exampleRatData</span>, <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"mmusculus_gene_ensembl"</span>,
+<span class='kw'>libraryType</span> <span class='kw'>=</span> <span class='st'>"affy_mouse430a_2"</span>)</div><div class='output co'>#&gt; <span class='message'>* Reading file</span></div><div class='output co'>#&gt; <span class='message'>* Getting gene symbol and length from biomaRt</span></div><div class='output co'>#&gt; <span class='message'>The gene identifier or the species</span>
+#&gt; <span class='message'>            selected was incorrect for the uploaded data. Please select</span>
+#&gt; <span class='message'>            the correct species and gene identifier for your data.</span></div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'>LONGOcmd</span>(<span class='st'>"~/data.csv"</span>)</div><div class='output co'>#&gt; <span class='message'>* Reading file</span></div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'C:/Users/Alex/Documents/data.csv': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in file(file, "rt"): cannot open the connection</span></div><div class='input'><span class='fu'>LONGOcmd</span>(<span class='st'>"~/data.csv"</span>, <span class='kw'>windowSize</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>stepSize</span><span class='kw'>=</span><span class='fl'>20</span>)</div><div class='output co'>#&gt; <span class='message'>* Reading file</span></div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'C:/Users/Alex/Documents/data.csv': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in file(file, "rt"): cannot open the connection</span></div><div class='input'><span class='fu'>LONGOcmd</span>(<span class='st'>"~/data.csv"</span>, <span class='kw'>multiProbes</span><span class='kw'>=</span><span class='st'>"highest"</span>)</div><div class='output co'>#&gt; <span class='message'>* Reading file</span></div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'C:/Users/Alex/Documents/data.csv': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in file(file, "rt"): cannot open the connection</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -188,7 +193,9 @@ statistical analysis</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -1,3 +1,9 @@
+## LONGO 0.3.3
+
+### Main changes
+    - Fixed error in GO analysis. Updated documentation.
+________________________________________________________________________________
+
 ## LONGO 0.3.2
 
 ### Main changes

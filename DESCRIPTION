@@ -1,7 +1,7 @@
 Package: LONGO
 Type: Package
 Title: Long gene expression as a metric for neuronal identity
-Version: 0.3.2
+Version: 0.3.3
 biocViews: Transcriptomics, ResearchField, Software, BiologicalQuestion,
     DifferentialExpression, GeneExpression
 Depends: R (>= 3.4)

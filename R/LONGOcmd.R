@@ -26,7 +26,7 @@
 #' @param controlColumn column of the data used as a control for the
 #' statistical analysis
 #' @examples
-#' LONGOcmd(exampleData, species = "mmusculus_gene_ensembl",
+#' LONGOcmd(exampleRatData, species = "mmusculus_gene_ensembl",
 #' libraryType = "affy_mouse430a_2")
 #' \donttest{
 #' LONGOcmd("~/data.csv")

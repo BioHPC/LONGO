@@ -12,8 +12,9 @@
 #'  windows, default=40
 #' @param windowStyle Option to alter the method used to create windows,
 #' default=mean
-#' @param filterData Option to filter data, default=TRUE
-#' @param normalizeData Option to normalize data, default=TRUE
+#' @param filterData Option to filter data using edgeR::cpm, default=TRUE
+#' @param normalizeData Option to normalize data using
+#' preprocessCore::normalize.quantiles, default=TRUE
 #' @param controlColumn column of the data used as a control for the
 #' statistical analyses
 #' @import edgeR
@@ -94,7 +95,7 @@ analyze <- function(analyzeData,
                 analyzeData[2:(ncol(analyzeData) - 1)]))
     }
 
-    analyzeData$length <- as.numeric(as.character(analyzeData$length))
+    analyzeData$length <- as.numeric(as.character(analyzeData[,ncol(analyzeData)]))
     analyzeData <-
         analyzeData[order(analyzeData$length, decreasing=FALSE, na.last=NA),]
     row.names(analyzeData) <- 1:nrow(analyzeData)

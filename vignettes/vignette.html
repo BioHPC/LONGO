@@ -12,7 +12,7 @@
 
 <meta name="author" content="Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo" />
 
-<meta name="date" content="2018-02-06" />
+<meta name="date" content="2018-03-09" />
 
 <title>LONGO Vignette</title>
 
@@ -32,7 +32,7 @@
 
 <h1 class="title toc-ignore">LONGO Vignette</h1>
 <h4 class="author"><em>Alexander Paul, Matthew McCoy, Haijun Gong, Tae-Hyuk (Ted) Ahn, Andrew Yoo</em></h4>
-<h4 class="date"><em>2018-02-06</em></h4>
+<h4 class="date"><em>2018-03-09</em></h4>
 
 
 
@@ -82,7 +82,7 @@ biocLite(&quot;Rgraphviz&quot;)</code></pre></li>
 <h2>Usage:</h2>
 <div id="pre-processing" class="section level3">
 <h3>Pre-processing:</h3>
-<p>In order to use LONGO the data needs to be in a specific format. This format has the gene identifier in the first column and all of the other columns are expression values. The first row can be a header which will help in viewing the plots. An example data set can be downloaded <a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix">here</a>. This data is in the correct format.</p>
+<p>In order to use LONGO the data needs to be in a specific format. This format has the gene identifier in the first column and all of the other columns are expression values. The first row can be a header which will help in viewing the plots. An example dataset can be downloaded <a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE69nnn/GSE69480/matrix">here</a>. This data is in the correct format.</p>
 </div>
 <div id="longo-1" class="section level3">
 <h3>LONGO():</h3>
@@ -121,92 +121,47 @@ biocLite(&quot;Rgraphviz&quot;)</code></pre></li>
         MULTI_PROBES = &quot;highest&quot;, FILTERED = FALSE)</code></pre>
 </div>
 </div>
-<div id="biomart-identifier-as-of-2018-02-06" class="section level2">
-<h2>Biomart identifier (as of 2018-02-06)</h2>
+<div id="biomart-identifier-as-of-2018-03-09" class="section level2">
+<h2>Biomart identifier (as of 2018-03-09)</h2>
 <p>Below is a list of all the Biomart data sets available.</p>
 <pre><code>##                           dataset
-## 1       ptroglodytes_gene_ensembl
-## 2             dordii_gene_ensembl
-## 3         eeuropaeus_gene_ensembl
-## 4         gaculeatus_gene_ensembl
-## 5          lafricana_gene_ensembl
-## 6        scerevisiae_gene_ensembl
-## 7         xmaculatus_gene_ensembl
-## 8             fcatus_gene_ensembl
-## 9      cintestinalis_gene_ensembl
-## 10         psinensis_gene_ensembl
-## 11          tguttata_gene_ensembl
-## 12          pformosa_gene_ensembl
-## 13         ecaballus_gene_ensembl
-## 14      mleucophaeus_gene_ensembl
-## 15     dnovemcinctus_gene_ensembl
-## 16           caperea_gene_ensembl
-## 17         mspreteij_gene_ensembl
-## 18         loculatus_gene_ensembl
-## 19           ngalili_gene_ensembl
-## 20        cpalliatus_gene_ensembl
-## 21        tbelangeri_gene_ensembl
-## 22          mmurinus_gene_ensembl
-## 23           sscrofa_gene_ensembl
-## 24        cporcellus_gene_ensembl
-## 25          pbairdii_gene_ensembl
-## 26          mmulatta_gene_ensembl
-## 27        oniloticus_gene_ensembl
-## 28     tnigroviridis_gene_ensembl
-## 29         mmusculus_gene_ensembl
-## 30       xtropicalis_gene_ensembl
-## 31       fdamarensis_gene_ensembl
-## 32        cchok1gshd_gene_ensembl
-## 33           ccrigri_gene_ensembl
-## 34    aplatyrhynchos_gene_ensembl
-## 35            oaries_gene_ensembl
-## 36           btaurus_gene_ensembl
-## 37      amelanoleuca_gene_ensembl
-## 38        ttruncatus_gene_ensembl
-## 39           mpahari_gene_ensembl
-## 40        mdomestica_gene_ensembl
-## 41        pcoquereli_gene_ensembl
-## 42         oanatinus_gene_ensembl
-## 43       cfamiliaris_gene_ensembl
-## 44      mochrogaster_gene_ensembl
-## 45           panubis_gene_ensembl
-## 46           mcaroli_gene_ensembl
-## 47         pvampyrus_gene_ensembl
-## 48         etelfairi_gene_ensembl
-## 49             catys_gene_ensembl
-## 50           ggallus_gene_ensembl
-## 51        mgallopavo_gene_ensembl
-## 52          celegans_gene_ensembl
-## 53          mauratus_gene_ensembl
-## 54           pabelii_gene_ensembl
-## 55            odegus_gene_ensembl
-## 56          csabaeus_gene_ensembl
-## 57         csyrichta_gene_ensembl
-## 58     acarolinensis_gene_ensembl
-## 59 itridecemlineatus_gene_ensembl
-## 60         sharrisii_gene_ensembl
-## 61     mfascicularis_gene_ensembl
-## 62          olatipes_gene_ensembl
-## 63         csavignyi_gene_ensembl
-## 64          cjacchus_gene_ensembl
-## 65            vpacos_gene_ensembl
-## 66             mfuro_gene_ensembl
-## 67         ppaniscus_gene_ensembl
-## 68       nleucogenys_gene_ensembl
-## 69         trubripes_gene_ensembl
-## 70           gmorhua_gene_ensembl
-## 71       mnemestrina_gene_ensembl
-## 72        rroxellana_gene_ensembl
-## 73       falbicollis_gene_ensembl
-## 74        amexicanus_gene_ensembl
-## 75          ggorilla_gene_ensembl
-## 76          jjaculus_gene_ensembl
-## 77             hmale_gene_ensembl
-## 78         oprinceps_gene_ensembl
-## 79          saraneus_gene_ensembl
-## 80        ocuniculus_gene_ensembl
-## 81        lchalumnae_gene_ensembl
-## 82            drerio_gene_ensembl</code></pre>
+## 1          mspreteij_gene_ensembl
+## 2        mnemestrina_gene_ensembl
+## 3           mauratus_gene_ensembl
+## 4           olatipes_gene_ensembl
+## 5         cpalliatus_gene_ensembl
+## 6          csavignyi_gene_ensembl
+## 7       sboliviensis_gene_ensembl
+## 8         cchok1gshd_gene_ensembl
+## 9             drerio_gene_ensembl
+## 10      mochrogaster_gene_ensembl
+## 11         oanatinus_gene_ensembl
+## 12          pbairdii_gene_ensembl
+## 13          mmulatta_gene_ensembl
+## 14        ccapucinus_gene_ensembl
+## 15          pformosa_gene_ensembl
+## 16          hsapiens_gene_ensembl
+## 17         psinensis_gene_ensembl
+## 18        oniloticus_gene_ensembl
+## 19 itridecemlineatus_gene_ensembl
+## 20        pcoquereli_gene_ensembl
+## 21     acarolinensis_gene_ensembl
+## 22         ecaballus_gene_ensembl
+## 23           pabelii_gene_ensembl
+## 24        mgallopavo_gene_ensembl
+## 25           ggallus_gene_ensembl
+## 26        ogarnettii_gene_ensembl
+## 27           hfemale_gene_ensembl
+## 28            dordii_gene_ensembl
+## 29          mmurinus_gene_ensembl
+## 30          csabaeus_gene_ensembl
+## 31           btaurus_gene_ensembl
+## 32        mdomestica_gene_ensembl
+## 33     mfascicularis_gene_ensembl
+## 34        xmaculatus_gene_ensembl
+## 35        rroxellana_gene_ensembl
+## 36             catys_gene_ensembl
+## 37         ppaniscus_gene_ensembl</code></pre>
 <p>Once the data set is selected from above it is possible to get a list of possible gene identifies using the following command, where ‘speciesDataset’ is equal to a data set from the above list.</p>
 <pre><code>    ensembl &lt;- biomaRt::useMart(&quot;ENSEMBL_MART_ENSEMBL&quot;, 
         host = &quot;www.ensembl.org&quot;, dataset=&lt;speciesDataset&gt;)</code></pre>
