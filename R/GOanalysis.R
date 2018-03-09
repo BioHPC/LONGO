@@ -29,8 +29,7 @@ GOanalysis <- function(analyzeData,
                         sigCount=15,
                         sigCutOff=0.01,
                         textScale=0.15) {
-    #library(topGO, quietly=TRUE)
-    requireNamespace("topGO", quietly = TRUE)
+    library(topGO, quietly=TRUE)
     #query biomart for go terms
     if(is.null(biomaRt.go.df)){
         genes.unique <- unique(analyzeData$symbol)
