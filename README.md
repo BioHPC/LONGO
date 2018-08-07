@@ -29,69 +29,18 @@ making up the windows to the window values in the control.
     * Mac OS X: https://cran.r-project.org/bin/macosx/
     * Linux: https://cran.r-project.org/bin/linux/
 
-- biomaRt package
+- Required packages to run LONGO
 
-  * install by using the following R commands:
+  * install the required prerequisite packages using the following R commands:
+  ```r
+  source("https://bioconductor.org/biocLite.R")
+  biocLite(c("biomaRt", "edgeR", "preprocessCore", "topGO", "Rgraphviz", "shiny", "DT", "data.table", "hash")) 
+  ```
 
-        > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("biomaRt")  
+# Installing the LONGO Package:
 
-- edgeR package
-
-  * install by using the following R commands:
-
-        > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("edgeR")  
-
-- preprocessCore package
-
-  * install by using the following R commands:
-
-        > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("preprocessCore")  
-
-- topGO package
-
-  * install by using the following R commands:
-
-        > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("topGO")  
-
-- Rgraphviz package
-
-  * install by using the following R commands:
-
-        > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("Rgraphviz")
-
-- shiny package:
-
-  * install by using the following R command:
-
-        > install.packages("shiny")  
-
-- DT package
-
-  * install by using the following R command:
-
-        > install.packages("DT")  
-
-- data.table package
-
-  * install by using the following R command:
-
-        > install.packages("data.table")  
-
-- hash package:
-
-  * install by using the following R command:
-
-        > install.packages("hash")
-
-# Installing LONGO Package:
-
-To install the LONGO package all the prerequisites above need to be installed.
-After confirming those packages are installed start RStudio. From there follow
+To install the LONGO package, all the prerequisites above need to be installed.
+After confirming those packages are installed, start RStudio. From there, follow
 the instructions below:
 
 * Tools dropdown -> Install Packages…
