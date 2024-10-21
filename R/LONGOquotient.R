@@ -50,6 +50,6 @@ LONGOquotient <- function(
     for (i in 1:ncol(final.df)) {
         final.df[1,i] <- final.df[1,i]*LQSign[1,i]
     }
-    final.df <- final.df[order(final.df)]
+    final.df <- final.df[, order(as.numeric(final.df[1, ]))]
     return(final.df)
 }
