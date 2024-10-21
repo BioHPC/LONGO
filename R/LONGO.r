@@ -57,7 +57,7 @@
 LONGO <- function() {
 
     ensembl <- biomaRt::useMart("ENSEMBL_MART_ENSEMBL",
-        host="www.ensembl.org")
+        host="https://www.ensembl.org")
     datasets <- biomaRt::listDatasets(ensembl)
     datasets <- datasets[1]
     datasets <- datasets[order(datasets$dataset), ]
