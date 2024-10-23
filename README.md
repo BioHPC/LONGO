@@ -29,6 +29,13 @@ making up the windows to the window values in the control.
     * Mac OS X: https://cran.r-project.org/bin/macosx/
     * Linux: https://cran.r-project.org/bin/linux/
 
+
+- BiocManager package
+  
+  * install by using the following R commands:
+    
+        > install.packages("BiocManager")
+
 - biomaRt package
 
   * install by using the following R commands:
