@@ -41,35 +41,35 @@ making up the windows to the window values in the control.
   * install by using the following R commands:
 
         > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("biomaRt")  
+        > BiocManager::install("biomaRt")  
 
 - edgeR package
 
   * install by using the following R commands:
 
         > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("edgeR")  
+        > BiocManager::install("edgeR")  
 
 - preprocessCore package
 
   * install by using the following R commands:
 
         > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("preprocessCore")  
+        > BiocManager::install("preprocessCore") 
 
 - topGO package
 
   * install by using the following R commands:
 
         > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("topGO")  
+        > BiocManager::install("topGO")  
 
 - Rgraphviz package
 
   * install by using the following R commands:
 
         > source("https://bioconductor.org/biocLite.R")  
-        > biocLite("Rgraphviz")
+        > BiocManager::install("Rgraphviz")
 
 - shiny package:
 
