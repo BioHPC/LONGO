@@ -60,7 +60,7 @@ LONGO <- function() {
         host="https://www.ensembl.org")
     datasets <- biomaRt::listDatasets(ensembl)
     datasets <- datasets[1]
-    datasets <- datasets[order(datasets$dataset), ]
+    #datasets <- datasets[order(datasets$dataset), ]
     datasets <- as.data.frame(datasets)
     ui <- shiny::shinyUI({
         shiny::navbarPage("LONGO",
